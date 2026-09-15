@@ -55,11 +55,11 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     z-index: 1;
     transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
-.curtain-left { left: 0; transform-origin: left; border-right: 3px solid var(--accent); }
-.curtain-right { right: 0; transform-origin: right; border-left: 3px solid var(--accent); }
-/* Bunch up (scale to 0 width) instead of sliding flatly */
-#preloader.loaded .curtain-left { transform: scaleX(0); }
-#preloader.loaded .curtain-right { transform: scaleX(0); }
+.curtain-left { left: 0; transform-origin: top left; border-right: 3px solid var(--accent); }
+.curtain-right { right: 0; transform-origin: top right; border-left: 3px solid var(--accent); }
+/* Bunch up (scale to 0 width) and skew (swing) instead of sliding flatly */
+#preloader.loaded .curtain-left { transform: scaleX(0) skewX(-15deg); }
+#preloader.loaded .curtain-right { transform: scaleX(0) skewX(15deg); }
 
 /* ===== WebGL Background ===== */
 #webgl-canvas {
@@ -143,8 +143,8 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     box-shadow: 0 0 50px rgba(0,0,0,0.9);
     pointer-events: none; /* Let mouse interact with hero */
 }
-.curtain-l { left: 0; transform-origin: left; transform: scaleX(0.15); border-right: 2px solid var(--accent); }
-.curtain-r { right: 0; transform-origin: right; transform: scaleX(0.15); border-left: 2px solid var(--accent); }
+.curtain-l { left: 0; transform-origin: top left; transform: scaleX(0.15); border-right: 2px solid var(--accent); }
+.curtain-r { right: 0; transform-origin: top right; transform: scaleX(0.15); border-left: 2px solid var(--accent); }
 
 .scroll-indicator {
     position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);

@@ -163,23 +163,48 @@ const curtainR = document.querySelector('.curtain-r');
 const heroSection = document.querySelector('.hero-section');
 
 if (heroSection && curtainL && curtainR) {
+    let lastMouseX = window.innerWidth / 2;
+
     heroSection.addEventListener('mousemove', (e) => {
         const mouseX = e.clientX;
         const centerX = window.innerWidth / 2;
-        // Dist is 0 when mouse is at center, 1 when at edge
+        
+        // Pull effect based on distance from center
         const dist = Math.abs(mouseX - centerX) / centerX; 
+        const scale = 0.15 + (dist * 0.25); // Slightly wider pull
         
-        // When mouse is near center, curtains are open (scaleX ~ 0.1)
-        // When mouse is near edges, curtains pull in slightly (scaleX ~ 0.35)
-        const scale = 0.15 + (dist * 0.2);
+        // Fluid dynamics based on mouse velocity
+        const velocityX = mouseX - lastMouseX;
+        const clampedVel = Math.max(-40, Math.min(40, velocityX));
         
-        gsap.to(curtainL, { scaleX: scale, duration: 0.5, ease: "power2.out" });
-        gsap.to(curtainR, { scaleX: scale, duration: 0.5, ease: "power2.out" });
+        // Apply skew to simulate heavy fabric swinging
+        const swayL = (mouseX < centerX) ? clampedVel * 0.2 : clampedVel * 0.05;
+        const swayR = (mouseX > centerX) ? clampedVel * 0.2 : clampedVel * 0.05;
+        
+        gsap.to(curtainL, { 
+            scaleX: scale, 
+            skewX: -swayL, // Negative skew makes bottom trail behind
+            duration: 0.8, 
+            ease: "elastic.out(1, 0.6)" // Bouncy fluid physics
+        });
+        gsap.to(curtainR, { 
+            scaleX: scale, 
+            skewX: -swayR,
+            duration: 0.8, 
+            ease: "elastic.out(1, 0.6)" 
+        });
+        
+        lastMouseX = mouseX;
     });
     
     // Snap back slightly when mouse leaves hero
     heroSection.addEventListener('mouseleave', () => {
-        gsap.to([curtainL, curtainR], { scaleX: 0.15, duration: 1, ease: "elastic.out(1, 0.4)" });
+        gsap.to([curtainL, curtainR], { 
+            scaleX: 0.15, 
+            skewX: 0,
+            duration: 1.5, 
+            ease: "elastic.out(1, 0.3)" 
+        });
     });
 }
 
