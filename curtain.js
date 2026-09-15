@@ -204,7 +204,7 @@ class Cloth {
         for (let side = 0; side < 2; side++) {
             const curtain = this.particles[side];
 
-            // Render as filled quads with lighting
+            // === PASS 1: Base fabric quads with lighting ===
             for (let row = 0; row < this.rows - 1; row++) {
                 for (let col = 0; col < this.cols - 1; col++) {
                     const p00 = this._getParticle(curtain, col, row);
@@ -212,13 +212,10 @@ class Cloth {
                     const p01 = this._getParticle(curtain, col, row + 1);
                     const p11 = this._getParticle(curtain, col + 1, row + 1);
 
-                    // Calculate normal for lighting (simplified)
                     const dx = p10.x - p00.x;
                     const normalFactor = dx / ((w / 2) / (this.cols - 1));
-                    // Positive normal = facing right (lit), negative = facing left (shadowed)
                     const light = Math.max(0.15, Math.min(1, 0.5 + normalFactor * 0.5));
 
-                    // Deep velvet red with lighting
                     const r = Math.floor(140 * light + 40);
                     const g = Math.floor(15 * light);
                     const b = Math.floor(30 * light + 15);
@@ -232,7 +229,7 @@ class Cloth {
                     ctx.closePath();
                     ctx.fill();
 
-                    // Add subtle highlight streaks on prominent folds
+                    // Subtle highlight streaks on prominent folds
                     if (light > 0.7) {
                         ctx.strokeStyle = `rgba(200, 100, 80, ${(light - 0.7) * 0.3})`;
                         ctx.lineWidth = 0.5;
@@ -244,7 +241,128 @@ class Cloth {
                 }
             }
 
-            // Gold fringe along the inner edge (last column for left, first column for right)
+            // === PASS 2: Damask diamond lattice pattern ===
+            // Draw a repeating diamond grid that deforms with the cloth
+            const patternStep = 4; // Every Nth cell gets a diamond
+            ctx.strokeStyle = 'rgba(180, 120, 50, 0.12)';
+            ctx.lineWidth = 1;
+
+            for (let row = patternStep; row < this.rows - patternStep; row += patternStep) {
+                for (let col = 1; col < this.cols - 1; col += patternStep) {
+                    const pC = this._getParticle(curtain, col, row);
+                    const pT = this._getParticle(curtain, col, Math.max(0, row - patternStep));
+                    const pB = this._getParticle(curtain, col, Math.min(this.rows - 1, row + patternStep));
+                    const pL = this._getParticle(curtain, Math.max(0, col - Math.floor(patternStep / 2)), row);
+                    const pR = this._getParticle(curtain, Math.min(this.cols - 1, col + Math.floor(patternStep / 2)), row);
+
+                    // Calculate local lighting for pattern visibility
+                    const dx = pR.x - pL.x;
+                    const localLight = Math.max(0.15, Math.min(1, 0.5 + (dx / 40) * 0.5));
+                    const alpha = localLight * 0.18;
+
+                    ctx.strokeStyle = `rgba(212, 175, 55, ${alpha})`;
+
+                    // Diamond shape
+                    ctx.beginPath();
+                    ctx.moveTo(pC.x, pT.y + (pC.y - pT.y) * 0.5);
+                    ctx.lineTo(pR.x - (pR.x - pC.x) * 0.3, pC.y);
+                    ctx.lineTo(pC.x, pB.y - (pB.y - pC.y) * 0.5);
+                    ctx.lineTo(pL.x + (pC.x - pL.x) * 0.3, pC.y);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            }
+
+            // === PASS 3: Ornate swirl flourishes at key positions ===
+            const swirls = [
+                { col: Math.floor(this.cols * 0.5), row: Math.floor(this.rows * 0.2) },
+                { col: Math.floor(this.cols * 0.5), row: Math.floor(this.rows * 0.5) },
+                { col: Math.floor(this.cols * 0.5), row: Math.floor(this.rows * 0.8) },
+                { col: Math.floor(this.cols * 0.3), row: Math.floor(this.rows * 0.35) },
+                { col: Math.floor(this.cols * 0.7), row: Math.floor(this.rows * 0.35) },
+                { col: Math.floor(this.cols * 0.3), row: Math.floor(this.rows * 0.65) },
+                { col: Math.floor(this.cols * 0.7), row: Math.floor(this.rows * 0.65) },
+            ];
+
+            for (const s of swirls) {
+                if (s.col >= this.cols || s.row >= this.rows) continue;
+                const pc = this._getParticle(curtain, s.col, s.row);
+                // Get neighbors for local deformation context
+                const pUp = this._getParticle(curtain, s.col, Math.max(0, s.row - 2));
+                const pDn = this._getParticle(curtain, s.col, Math.min(this.rows - 1, s.row + 2));
+                const pLt = this._getParticle(curtain, Math.max(0, s.col - 2), s.row);
+                const pRt = this._getParticle(curtain, Math.min(this.cols - 1, s.col + 2), s.row);
+
+                const dx = pRt.x - pLt.x;
+                const localLight = Math.max(0.15, Math.min(1, 0.5 + (dx / 30) * 0.5));
+                const alpha = localLight * 0.22;
+                const radius = Math.abs(pRt.x - pLt.x) * 0.4;
+
+                if (radius < 3) continue; // Too compressed, skip
+
+                ctx.strokeStyle = `rgba(212, 175, 55, ${alpha})`;
+                ctx.lineWidth = 1;
+
+                // Draw a baroque scroll/curl pattern
+                // Left curl
+                ctx.beginPath();
+                ctx.arc(pc.x - radius * 0.4, pc.y, radius * 0.35, -Math.PI * 0.5, Math.PI, false);
+                ctx.stroke();
+                // Right curl (mirrored)
+                ctx.beginPath();
+                ctx.arc(pc.x + radius * 0.4, pc.y, radius * 0.35, -Math.PI * 0.5, 0, true);
+                ctx.stroke();
+                // Connecting arch on top
+                ctx.beginPath();
+                ctx.moveTo(pc.x - radius * 0.5, pc.y - radius * 0.15);
+                ctx.quadraticCurveTo(pc.x, pc.y - radius * 0.6, pc.x + radius * 0.5, pc.y - radius * 0.15);
+                ctx.stroke();
+                // Connecting arch on bottom
+                ctx.beginPath();
+                ctx.moveTo(pc.x - radius * 0.5, pc.y + radius * 0.15);
+                ctx.quadraticCurveTo(pc.x, pc.y + radius * 0.6, pc.x + radius * 0.5, pc.y + radius * 0.15);
+                ctx.stroke();
+                // Center dot
+                ctx.fillStyle = `rgba(212, 175, 55, ${alpha * 0.8})`;
+                ctx.beginPath();
+                ctx.arc(pc.x, pc.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // === PASS 4: Horizontal decorative borders ===
+            const borderRows = [
+                Math.floor(this.rows * 0.08),
+                Math.floor(this.rows * 0.92),
+            ];
+            for (const bRow of borderRows) {
+                if (bRow >= this.rows) continue;
+                // Top border line
+                ctx.strokeStyle = 'rgba(212, 175, 55, 0.15)';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                for (let col = 0; col < this.cols; col++) {
+                    const p = this._getParticle(curtain, col, bRow);
+                    if (col === 0) ctx.moveTo(p.x, p.y);
+                    else ctx.lineTo(p.x, p.y);
+                }
+                ctx.stroke();
+
+                // Small scallop/wave pattern along the border
+                ctx.strokeStyle = 'rgba(212, 175, 55, 0.1)';
+                ctx.lineWidth = 1;
+                for (let col = 0; col < this.cols - 2; col += 2) {
+                    const p1 = this._getParticle(curtain, col, bRow);
+                    const p2 = this._getParticle(curtain, col + 2, bRow);
+                    const midX = (p1.x + p2.x) / 2;
+                    const midY = (p1.y + p2.y) / 2;
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.quadraticCurveTo(midX, midY - 6, p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+
+            // === PASS 5: Gold fringe along the inner edge ===
             const fringeCol = side === 0 ? this.cols - 1 : 0;
             ctx.strokeStyle = '#d4af37';
             ctx.lineWidth = 3;
@@ -259,15 +377,38 @@ class Cloth {
             ctx.stroke();
             ctx.shadowBlur = 0;
 
-            // Bottom fringe tassels
-            ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
-            ctx.lineWidth = 1;
-            for (let col = 0; col < this.cols; col += 2) {
+            // Second inner fringe line (thinner, slightly inset)
+            const fringeCol2 = side === 0 ? this.cols - 3 : 2;
+            if (fringeCol2 >= 0 && fringeCol2 < this.cols) {
+                ctx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                for (let row = 0; row < this.rows; row++) {
+                    const p = this._getParticle(curtain, fringeCol2, row);
+                    if (row === 0) ctx.moveTo(p.x, p.y);
+                    else ctx.lineTo(p.x, p.y);
+                }
+                ctx.stroke();
+            }
+
+            // === PASS 6: Bottom fringe tassels ===
+            for (let col = 0; col < this.cols; col++) {
                 const p = this._getParticle(curtain, col, this.rows - 1);
+                const tassel = 6 + Math.sin(col * 1.5) * 4;
+                // Tassel string
+                ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+                ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p.x + (Math.random() * 4 - 2), p.y + 8 + Math.random() * 6);
+                ctx.lineTo(p.x + Math.sin(col * 0.8 + Date.now() * 0.001) * 2, p.y + tassel);
                 ctx.stroke();
+                // Tassel bulb (every other)
+                if (col % 2 === 0) {
+                    ctx.fillStyle = 'rgba(212, 175, 55, 0.3)';
+                    ctx.beginPath();
+                    ctx.arc(p.x + Math.sin(col * 0.8 + Date.now() * 0.001) * 2, p.y + tassel + 2, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
             }
         }
     }
