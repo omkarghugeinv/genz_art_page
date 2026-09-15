@@ -47,10 +47,9 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 }
 .curtain-left, .curtain-right {
     position: absolute; top: 0; width: 50%; height: 100%;
-    /* Combine the texture and the red gradient */
-    background-image: 
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.4) 40px, rgba(0,0,0,0.4) 80px),
-        linear-gradient(90deg, #3d0514, var(--primary), #3d0514);
+    background-image: url('images/curtain_texture.jpg');
+    background-size: cover;
+    background-position: center;
     box-shadow: 0 0 50px rgba(0,0,0,0.9);
     z-index: 1;
     transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
@@ -136,9 +135,9 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 
 .interactive-curtain {
     position: absolute; top: 0; width: 50vw; height: 100%;
-    background-image: 
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.4) 40px, rgba(0,0,0,0.4) 80px),
-        linear-gradient(90deg, #3d0514, var(--primary), #3d0514);
+    background-image: url('images/curtain_texture.jpg');
+    background-size: cover;
+    background-position: center;
     z-index: 10;
     box-shadow: 0 0 50px rgba(0,0,0,0.9);
     pointer-events: none; /* Let mouse interact with hero */
