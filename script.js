@@ -1,17 +1,7 @@
 // ===== FIX: Declare isHoveringForm early to avoid temporal dead zone =====
 let isHoveringForm = false;
 
-// ===== PRELOADER =====
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.classList.add('loaded');
-            // Remove from DOM after animation completes
-            setTimeout(() => preloader.remove(), 1200);
-        }, 800); // Short delay so the logo is visible
-    }
-});
+// Preloader is handled by curtain.js (cloth physics simulation)
 
 // ===== MOBILE MENU TOGGLE =====
 const mobileBtn = document.querySelector('.mobile-menu-btn');
@@ -157,56 +147,7 @@ function setActiveNav(sectionId) {
     });
 }
 
-// ===== INTERACTIVE STAGE CURTAINS (HERO) =====
-const curtainL = document.querySelector('.curtain-l');
-const curtainR = document.querySelector('.curtain-r');
-const heroSection = document.querySelector('.hero-section');
-
-if (heroSection && curtainL && curtainR) {
-    let lastMouseX = window.innerWidth / 2;
-
-    heroSection.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX;
-        const centerX = window.innerWidth / 2;
-        
-        // Pull effect based on distance from center
-        const dist = Math.abs(mouseX - centerX) / centerX; 
-        const scale = 0.15 + (dist * 0.25); // Slightly wider pull
-        
-        // Fluid dynamics based on mouse velocity
-        const velocityX = mouseX - lastMouseX;
-        const clampedVel = Math.max(-40, Math.min(40, velocityX));
-        
-        // Apply skew to simulate heavy fabric swinging
-        const swayL = (mouseX < centerX) ? clampedVel * 0.2 : clampedVel * 0.05;
-        const swayR = (mouseX > centerX) ? clampedVel * 0.2 : clampedVel * 0.05;
-        
-        gsap.to(curtainL, { 
-            scaleX: scale, 
-            skewX: -swayL, // Negative skew makes bottom trail behind
-            duration: 0.8, 
-            ease: "elastic.out(1, 0.6)" // Bouncy fluid physics
-        });
-        gsap.to(curtainR, { 
-            scaleX: scale, 
-            skewX: -swayR,
-            duration: 0.8, 
-            ease: "elastic.out(1, 0.6)" 
-        });
-        
-        lastMouseX = mouseX;
-    });
-    
-    // Snap back slightly when mouse leaves hero
-    heroSection.addEventListener('mouseleave', () => {
-        gsap.to([curtainL, curtainR], { 
-            scaleX: 0.15, 
-            skewX: 0,
-            duration: 1.5, 
-            ease: "elastic.out(1, 0.3)" 
-        });
-    });
-}
+// Interactive stage curtains are handled by curtain.js (cloth physics simulation)
 
 // ===== NUMBER COUNTERS (AWARDS) =====
 const numbers = document.querySelectorAll('.award-number');
