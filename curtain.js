@@ -40,8 +40,8 @@ class RealisticCurtain {
             this.w = this.container.offsetWidth;
             this.h = this.container.offsetHeight;
             
-            this.camera = new THREE.OrthographicCamera(-this.w/2, this.w/2, this.h/2, -this.h/2, 0.1, 100);
-            this.camera.position.z = 10;
+            this.camera = new THREE.OrthographicCamera(-this.w/2, this.w/2, this.h/2, -this.h/2, 0.1, 5000);
+            this.camera.position.z = 1000;
 
             this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             this.renderer.setSize(this.w, this.h);
@@ -209,6 +209,9 @@ class RealisticCurtain {
                 p.x += vx;
                 p.y += vy - this.gravity * this.h; // Gravity pulls down (-Y in 3D)
                 p.z += vz;
+                
+                // Restoring force to bring it back to flat Z over time
+                p.z += (0 - p.z) * 0.05;
 
                 // Mouse interaction (Gentle pull towards mouse)
                 if (this.mouseActive) {
@@ -225,9 +228,9 @@ class RealisticCurtain {
                     }
                 }
 
-                // Floor constraint
-                if (p.y < -this.h / 2) {
-                    p.y = -this.h / 2;
+                // Floor constraint (lowered so it hangs naturally without bouncing on the exact bottom pixel)
+                if (p.y < -this.h) {
+                    p.y = -this.h;
                     p.oldY = p.y;
                 }
             }
