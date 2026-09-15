@@ -203,17 +203,18 @@ class RealisticCurtain {
                 p.y += vy - this.gravity * this.h; // Gravity pulls down (-Y in 3D)
                 p.z += vz;
 
-                // Mouse interaction
+                // Mouse interaction (Gentle pull towards mouse)
                 if (this.mouseActive) {
                     const absPx = p.x + meshOffsetX;
-                    const dx = absPx - this.mouse.x;
-                    const dy = p.y - this.mouse.y;
+                    const dx = this.mouse.x - absPx; // Vector towards mouse
+                    const dy = this.mouse.y - p.y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
                     if (dist < this.mouseRadius) {
-                        const force = (this.mouseRadius - dist) / this.mouseRadius * this.mouseStrength * this.h;
-                        p.x += (dx/dist) * force;
-                        p.y += (dy/dist) * force;
-                        p.z += force * 0.5; // Push outwards in Z
+                        // Spring-like pull that gets stronger closer to the center of the mouse
+                        const pullStrength = 0.05 * (this.mouseRadius - dist) / this.mouseRadius; 
+                        p.x += dx * pullStrength;
+                        p.y += dy * pullStrength;
+                        p.z += 10 * pullStrength; // Pull slightly out towards the screen
                     }
                 }
 
