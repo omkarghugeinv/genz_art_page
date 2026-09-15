@@ -34,14 +34,24 @@ if (mobileBtn && nav) {
 // ===== CUSTOM CURSOR (Ultra Smooth) =====
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
-
 let xTo, yTo;
-if (cursorOutline) {
-    xTo = gsap.quickTo(cursorOutline, "left", {duration: 0.4, ease: "power3.out"});
-    yTo = gsap.quickTo(cursorOutline, "top", {duration: 0.4, ease: "power3.out"});
+
+if (typeof gsap !== 'undefined') {
+    if (cursorOutline) {
+        xTo = gsap.quickTo(cursorOutline, "left", {duration: 0.4, ease: "power3.out"});
+        yTo = gsap.quickTo(cursorOutline, "top", {duration: 0.4, ease: "power3.out"});
+    }
+    // Only hide default cursor if custom cursor is active
+    document.body.classList.add('has-custom-cursor');
 }
 
+let lastMove = 0;
 window.addEventListener('mousemove', (e) => {
+    // Throttle slightly for performance
+    const now = Date.now();
+    if (now - lastMove < 10) return;
+    lastMove = now;
+
     if (cursorDot) {
         cursorDot.style.left = `${e.clientX}px`;
         cursorDot.style.top = `${e.clientY}px`;
@@ -65,7 +75,7 @@ document.addEventListener('mouseenter', () => {
 });
 
 // Hover effect for clickable elements
-const hoverables = document.querySelectorAll('a, .magnetic, .work-card, .gallery-item, .timeline-card, .award-card');
+const hoverables = document.querySelectorAll('a, .magnetic, .work-card, .gallery-item, .timeline-card, .award-card, .poll-option');
 hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
@@ -89,55 +99,63 @@ if (formContainer) {
 // ===== MAGNETIC MOTION PRIMITIVES =====
 const magnetics = document.querySelectorAll('.magnetic');
 magnetics.forEach((magnetic) => {
+    let position = null;
+    magnetic.addEventListener('mouseenter', () => {
+        position = magnetic.getBoundingClientRect(); // Cache position on enter
+    });
     magnetic.addEventListener('mousemove', function(e) {
-        const position = magnetic.getBoundingClientRect();
+        if (!position || typeof gsap === 'undefined') return;
         const x = e.clientX - position.left - position.width / 2;
         const y = e.clientY - position.top - position.height / 2;
         gsap.to(magnetic, { x: x * 0.25, y: y * 0.25, duration: 0.6, ease: "power3.out" });
     });
     magnetic.addEventListener('mouseleave', function() {
+        if (typeof gsap === 'undefined') return;
+        position = null;
         gsap.to(magnetic, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
     });
 });
 
 // ===== GSAP SCROLL ANIMATIONS =====
-gsap.registerPlugin(ScrollTrigger);
+if (typeof gsap !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
 
-// Hero entrance
-gsap.from(".split-text", { y: 60, opacity: 0, duration: 1.8, ease: "power4.out", stagger: 0.15 });
-gsap.from(".fade-up", { y: 30, opacity: 0, duration: 1.5, delay: 0.6, ease: "power3.out" });
+    // Hero entrance
+    gsap.from(".split-text", { y: 60, opacity: 0, duration: 1.8, ease: "power4.out", stagger: 0.15 });
+    gsap.from(".fade-up", { y: 30, opacity: 0, duration: 1.5, delay: 0.6, ease: "power3.out" });
 
-// Reveal on scroll
-document.querySelectorAll('.reveal').forEach((el) => {
-    gsap.fromTo(el,
-        { opacity: 0, y: 60 },
-        {
-            scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" },
-            opacity: 1, y: 0, duration: 1.2, ease: "expo.out"
-        }
-    );
-});
-
-// Floating image parallax
-gsap.to(".floating-img", {
-    yPercent: 15, ease: "none",
-    scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 1.5 }
-});
-
-// ===== ACTIVE NAV HIGHLIGHTING =====
-const sections = document.querySelectorAll('section[id]');
-const navLinksAll = document.querySelectorAll('.nav-link');
-
-sections.forEach(section => {
-    ScrollTrigger.create({
-        trigger: section,
-        start: "top 40%",
-        end: "bottom 40%",
-        onEnter: () => setActiveNav(section.id),
-        onEnterBack: () => setActiveNav(section.id),
+    // Reveal on scroll
+    document.querySelectorAll('.reveal').forEach((el) => {
+        gsap.fromTo(el,
+            { opacity: 0, y: 60 },
+            {
+                scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" },
+                opacity: 1, y: 0, duration: 1.2, ease: "expo.out"
+            }
+        );
     });
-});
 
+    // Floating image parallax
+    gsap.to(".floating-img", {
+        yPercent: 15, ease: "none",
+        scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 1.5 }
+    });
+
+    // ===== ACTIVE NAV HIGHLIGHTING =====
+    const sections = document.querySelectorAll('section[id]');
+    
+    sections.forEach(section => {
+        ScrollTrigger.create({
+            trigger: section,
+            start: "top 40%",
+            end: "bottom 40%",
+            onEnter: () => setActiveNav(section.id),
+            onEnterBack: () => setActiveNav(section.id),
+        });
+    });
+}
+
+const navLinksAll = document.querySelectorAll('.nav-link');
 function setActiveNav(sectionId) {
     navLinksAll.forEach(link => {
         link.classList.remove('active');
@@ -289,25 +307,44 @@ if (window.matchMedia("(pointer: fine)").matches) {
     resizeCanvas();
 
     class Spark {
-        constructor(x, y) {
+        constructor() {
+            this.active = false;
+        }
+        init(x, y, isBurst = false) {
+            this.active = true;
             this.x = x;
             this.y = y;
-            this.size = Math.random() * 5 + 1.5;
-            this.speedX = Math.random() * 2 - 1;
-            this.speedY = Math.random() * 2 - 1;
-            this.gravity = 0.03;
-            this.color = Math.random() > 0.6 ? '#d4af37' : '#c9184a';
+            if (isBurst) {
+                const burstColors = ['#d4af37', '#c9184a', '#ff4d6d', '#ffdf00', '#ffffff'];
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 10 + 2;
+                this.speedX = Math.cos(angle) * velocity;
+                this.speedY = Math.sin(angle) * velocity;
+                this.gravity = 0.15;
+                this.color = burstColors[Math.floor(Math.random() * burstColors.length)];
+                this.size = Math.random() * 8 + 2;
+                this.decay = Math.random() * 0.03 + 0.01;
+            } else {
+                this.size = Math.random() * 5 + 1.5;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.gravity = 0.03;
+                this.color = Math.random() > 0.6 ? '#d4af37' : '#c9184a';
+                this.decay = Math.random() * 0.015 + 0.01;
+            }
             this.life = 1.0;
-            this.decay = Math.random() * 0.015 + 0.01;
         }
         update() {
+            if (!this.active) return;
             this.speedY += this.gravity;
             this.x += this.speedX;
             this.y += this.speedY;
             this.life -= this.decay;
             this.size *= 0.96;
+            if (this.life <= 0 || this.size <= 0.1) this.active = false;
         }
         draw() {
+            if (!this.active) return;
             ctx.globalAlpha = Math.max(0, this.life);
             ctx.fillStyle = this.color;
             ctx.shadowBlur = 8;
@@ -316,6 +353,22 @@ if (window.matchMedia("(pointer: fine)").matches) {
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
             ctx.shadowBlur = 0;
+        }
+    }
+
+    const POOL_SIZE = 400;
+    const sparkPool = Array.from({length: POOL_SIZE}, () => new Spark());
+    let poolIdx = 0;
+    
+    function spawnSpark(x, y, isBurst = false) {
+        let attempts = 0;
+        while (sparkPool[poolIdx].active && attempts < POOL_SIZE) {
+            poolIdx = (poolIdx + 1) % POOL_SIZE;
+            attempts++;
+        }
+        if (!sparkPool[poolIdx].active) {
+            sparkPool[poolIdx].init(x, y, isBurst);
+            startAnimation();
         }
     }
 
@@ -335,7 +388,7 @@ if (window.matchMedia("(pointer: fine)").matches) {
             const t = i / count;
             const spawnX = lastX + (dx * t) + (Math.random() * 6 - 3);
             const spawnY = lastY + (dy * t) + (Math.random() * 6 - 3);
-            particles.push(new Spark(spawnX, spawnY));
+            spawnSpark(spawnX, spawnY, false);
         }
         lastX = e.clientX;
         lastY = e.clientY;
@@ -346,35 +399,38 @@ if (window.matchMedia("(pointer: fine)").matches) {
     // Burst on click
     window.addEventListener('mousedown', (e) => {
         if (isHoveringForm) return;
-        const burstColors = ['#d4af37', '#c9184a', '#ff4d6d', '#ffdf00', '#ffffff'];
         for(let i = 0; i < 35; i++) {
-            const spark = new Spark(e.clientX, e.clientY);
-            const angle = Math.random() * Math.PI * 2;
-            const velocity = Math.random() * 10 + 2;
-            spark.speedX = Math.cos(angle) * velocity;
-            spark.speedY = Math.sin(angle) * velocity;
-            spark.gravity = 0.15;
-            spark.color = burstColors[Math.floor(Math.random() * burstColors.length)];
-            spark.size = Math.random() * 8 + 2;
-            spark.decay = Math.random() * 0.03 + 0.01;
-            particles.push(spark);
+            spawnSpark(e.clientX, e.clientY, true);
         }
-        if (cursorOutline) {
+        if (typeof gsap !== 'undefined' && cursorOutline) {
             gsap.fromTo(cursorOutline, { scale: 0.5 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" });
         }
     });
 
+    let animationId = null;
     function animateSparks() {
         ctx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-            if (particles[i].life <= 0 || particles[i].size <= 0.1) {
-                particles.splice(i, 1);
-                i--;
+        let anyActive = false;
+        
+        for (let i = 0; i < POOL_SIZE; i++) {
+            const spark = sparkPool[i];
+            if (spark.active) {
+                spark.update();
+                spark.draw();
+                if (spark.active) anyActive = true;
             }
         }
-        requestAnimationFrame(animateSparks);
+        
+        if (anyActive) {
+            animationId = requestAnimationFrame(animateSparks);
+        } else {
+            animationId = null; // Stop the loop to save battery
+        }
     }
-    animateSparks();
+
+    function startAnimation() {
+        if (!animationId) {
+            animationId = requestAnimationFrame(animateSparks);
+        }
+    }
 }

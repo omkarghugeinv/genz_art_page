@@ -16,15 +16,18 @@ html { scroll-behavior: smooth; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    cursor: none;
     font-family: 'Outfit', sans-serif;
     background-color: var(--dark-bg);
     color: var(--text-light);
     overflow-x: hidden;
 }
 
+body.has-custom-cursor { cursor: none; }
+body.has-custom-cursor a, 
+body.has-custom-cursor button, 
+body.has-custom-cursor .magnetic { cursor: none; }
+
 iframe { cursor: auto; }
-a, button, .magnetic { cursor: none; }
 
 h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 
@@ -236,10 +239,12 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 /* ===== Survey Poll ===== */
 .poll-container { display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto; }
 .poll-option {
-    position: relative; background: rgba(10,10,10,0.8);
-    border: 1px solid var(--glass-border); border-radius: 4px;
-    padding: 20px; display: flex; justify-content: space-between;
-    overflow: hidden; transition: transform 0.3s, border-color 0.3s;
+    position: relative; padding: 15px 25px; border-radius: 8px;
+    border: 1px solid var(--glass-border); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    overflow: hidden; transition: border-color 0.3s;
+    background: transparent; color: var(--text-light); width: 100%;
+    font-family: inherit; font-size: 1rem;
 }
 .poll-option:hover { transform: scale(1.02); border-color: var(--primary); }
 .poll-fill {
@@ -279,8 +284,9 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 }
 .lightbox-close {
     position: absolute; top: 30px; right: 40px;
-    font-size: 2.5rem; color: white; cursor: pointer;
+    color: #fff; font-size: 3rem; cursor: pointer;
     transition: color 0.3s, transform 0.3s;
+    background: none; border: none; outline: none;
 }
 .lightbox-close:hover { color: var(--primary); transform: rotate(90deg); }
 
@@ -332,7 +338,7 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     display: none; position: fixed; top: 20px; right: 20px; z-index: 1000;
     width: 50px; height: 50px;
     background: var(--glass-bg); border: 1px solid var(--accent); border-radius: 50%;
-    color: var(--accent); font-size: 1.5rem;
+    color: var(--accent); font-size: 1.5rem; outline: none;
     align-items: center; justify-content: center;
     backdrop-filter: blur(12px); cursor: pointer;
 }
@@ -376,6 +382,14 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     .about-text h2, .work-section h2, .gallery-section h2, .awards-section h2 { font-size: 2.2rem; }
 
     .timeline-item { min-width: 280px; }
+    
+    /* Performance fixes for mobile GPUs */
+    .magnetic-nav, .glass-card, .lightbox {
+        backdrop-filter: none !important;
+    }
+    .magnetic-nav { background: rgba(15, 15, 15, 0.98); }
+    .glass-card { background: rgba(20, 20, 20, 0.98); }
+    .lightbox { background: rgba(0, 0, 0, 0.98); }
 }
 
 /* Touch Devices */

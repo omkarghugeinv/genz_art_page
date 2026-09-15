@@ -32,35 +32,42 @@ class RealisticCurtain {
     }
 
     initThree() {
-        this.scene = new THREE.Scene();
-        
-        // Setup orthographic camera to perfectly match screen
-        this.w = this.container.offsetWidth;
-        this.h = this.container.offsetHeight;
-        
-        // We will map 1 unit = 1 pixel approx, but scale the camera so 0,0 is center
-        this.camera = new THREE.OrthographicCamera(-this.w/2, this.w/2, this.h/2, -this.h/2, 0.1, 100);
-        this.camera.position.z = 10;
+        this.isSupported = false;
+        try {
+            this.scene = new THREE.Scene();
+            
+            // Setup orthographic camera to perfectly match screen
+            this.w = this.container.offsetWidth;
+            this.h = this.container.offsetHeight;
+            
+            this.camera = new THREE.OrthographicCamera(-this.w/2, this.w/2, this.h/2, -this.h/2, 0.1, 100);
+            this.camera.position.z = 10;
 
-        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        this.renderer.setSize(this.w, this.h);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        this.container.appendChild(this.renderer.domElement);
+            this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            this.renderer.setSize(this.w, this.h);
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            this.container.appendChild(this.renderer.domElement);
 
-        // Lights to create the velvet sheen
-        const ambient = new THREE.AmbientLight(0xffffff, 0.4);
-        this.scene.add(ambient);
-        
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight.position.set(0, 0, 10);
-        this.scene.add(dirLight);
+            // Lights to create the velvet sheen
+            const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+            this.scene.add(ambient);
+            
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(0, 0, 10);
+            this.scene.add(dirLight);
 
-        const pointLight = new THREE.PointLight(0xffaaaa, 0.5, 2000);
-        pointLight.position.set(0, this.h/2, 500);
-        this.scene.add(pointLight);
+            const pointLight = new THREE.PointLight(0xffaaaa, 0.5, 2000);
+            pointLight.position.set(0, this.h/2, 500);
+            this.scene.add(pointLight);
+            
+            this.isSupported = true;
+        } catch (e) {
+            console.warn("WebGL not supported or failed to initialize:", e);
+        }
     }
 
     loadTexture() {
+        if (!this.isSupported) return;
         const loader = new THREE.TextureLoader();
         loader.load(this.textureUrl, (tex) => {
             tex.wrapS = THREE.ClampToEdgeWrapping;
@@ -253,9 +260,30 @@ class RealisticCurtain {
     }
 
     animate = () => {
-        requestAnimationFrame(this.animate);
+        if (this.destroyed) return;
+        this.animationFrameId = requestAnimationFrame(this.animate);
         this.updatePhysics();
-        this.renderer.render(this.scene, this.camera);
+        if (this.renderer) this.renderer.render(this.scene, this.camera);
+    }
+
+    destroy() {
+        this.destroyed = true;
+        if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+        
+        if (this.geoL) this.geoL.dispose();
+        if (this.geoR) this.geoR.dispose();
+        if (this.material) this.material.dispose();
+        if (this.material && this.material.map) this.material.map.dispose();
+        
+        if (this.renderer) {
+            this.renderer.dispose();
+            const gl = this.renderer.getContext();
+            if (gl) {
+                const loseContext = gl.getExtension('WEBGL_lose_context');
+                if (loseContext) loseContext.loseContext();
+            }
+            this.container.removeChild(this.renderer.domElement);
+        }
     }
 
     resize() {
@@ -275,34 +303,52 @@ class RealisticCurtain {
 
 // ===== INIT SCRIPTS =====
 
+const isMobileDevice = window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches;
+
 // 1. PRELOADER CURTAINS
 const preloaderEl = document.getElementById('preloader');
 if (preloaderEl) {
-    // Hide CSS curtains
     const oldL = preloaderEl.querySelector('.curtain-left');
     const oldR = preloaderEl.querySelector('.curtain-right');
-    if (oldL) oldL.style.display = 'none';
-    if (oldR) oldR.style.display = 'none';
+    
+    let introCloth = null;
+    
+    if (!isMobileDevice) {
+        const container = document.createElement('div');
+        container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;';
+        preloaderEl.querySelector('.preloader-inner').appendChild(container);
 
-    const container = document.createElement('div');
-    container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;';
-    preloaderEl.querySelector('.preloader-inner').appendChild(container);
+        introCloth = new RealisticCurtain(container, {
+            cols: 30, rows: 40, gravity: 0.015, iterations: 5
+        });
 
-    const introCloth = new RealisticCurtain(container, {
-        cols: 30, rows: 40, gravity: 0.015, iterations: 5
-    });
-    introCloth.targetLeftPin = 0.5; // Fully closed
-    introCloth.targetRightPin = 0.5;
+        if (introCloth.isSupported) {
+            // WebGL successful, hide CSS fallback curtains
+            if (oldL) oldL.style.display = 'none';
+            if (oldR) oldR.style.display = 'none';
+            
+            introCloth.targetLeftPin = 0.5; // Fully closed
+            introCloth.targetRightPin = 0.5;
+        } else {
+            introCloth.destroy();
+            introCloth = null;
+        }
+    }
 
     window.addEventListener('load', () => {
         setTimeout(() => {
-            introCloth.targetLeftPin = 0.0; // Open
-            introCloth.targetRightPin = 0.0;
-            introCloth.pinLerp = 0.04;
-
+            if (introCloth) {
+                introCloth.targetLeftPin = 0.0; // Open
+                introCloth.targetRightPin = 0.0;
+                introCloth.pinLerp = 0.04;
+            }
+            
             setTimeout(() => {
                 preloaderEl.classList.add('loaded');
-                setTimeout(() => preloaderEl.remove(), 800);
+                setTimeout(() => {
+                    if (introCloth) introCloth.destroy(); // Free WebGL resources!
+                    preloaderEl.remove();
+                }, 800);
             }, 1500);
         }, 800);
     });
@@ -310,12 +356,7 @@ if (preloaderEl) {
 
 // 2. HERO SECTION CURTAINS
 const heroSection = document.querySelector('.hero-section');
-if (heroSection) {
-    const oldL = heroSection.querySelector('.curtain-l');
-    const oldR = heroSection.querySelector('.curtain-r');
-    if (oldL) oldL.style.display = 'none';
-    if (oldR) oldR.style.display = 'none';
-
+if (heroSection && !isMobileDevice) {
     const container = document.createElement('div');
     container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;pointer-events:none;';
     heroSection.appendChild(container);
@@ -325,31 +366,48 @@ if (heroSection) {
         mouseRadius: 200, mouseStrength: 0.03
     });
     
-    // Set to slightly open
-    heroCloth.leftPinRatio = 0.15;
-    heroCloth.rightPinRatio = 0.15;
-    heroCloth.targetLeftPin = 0.15;
-    heroCloth.targetRightPin = 0.15;
+    if (heroCloth.isSupported) {
+        const oldL = heroSection.querySelector('.curtain-l');
+        const oldR = heroSection.querySelector('.curtain-r');
+        if (oldL) oldL.style.display = 'none';
+        if (oldR) oldR.style.display = 'none';
 
-    heroSection.addEventListener('mousemove', (e) => {
-        const rect = heroSection.getBoundingClientRect();
-        heroCloth.setMouse(e.clientX - rect.left, e.clientY - rect.top, true);
-
-        // Extremely subtle opening based on horizontal pos
-        const centerX = window.innerWidth / 2;
-        const dist = Math.abs(e.clientX - centerX) / centerX;
-        const ratio = 0.15 + dist * 0.03; // Barely moves
-        heroCloth.targetLeftPin = ratio;
-        heroCloth.targetRightPin = ratio;
-    });
-
-    heroSection.addEventListener('mouseleave', () => {
-        heroCloth.setMouse(0, 0, false);
+        // Set to slightly open
+        heroCloth.leftPinRatio = 0.15;
+        heroCloth.rightPinRatio = 0.15;
         heroCloth.targetLeftPin = 0.15;
         heroCloth.targetRightPin = 0.15;
-    });
 
-    window.addEventListener('resize', () => {
-        if (heroCloth) heroCloth.resize();
-    });
+        const handleMove = (clientX, clientY) => {
+            const rect = heroSection.getBoundingClientRect();
+            heroCloth.setMouse(clientX - rect.left, clientY - rect.top, true);
+
+            // Extremely subtle opening based on horizontal pos
+            const centerX = window.innerWidth / 2;
+            const dist = Math.abs(clientX - centerX) / centerX;
+            const ratio = 0.15 + dist * 0.03; // Barely moves
+            heroCloth.targetLeftPin = ratio;
+            heroCloth.targetRightPin = ratio;
+        };
+
+        heroSection.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+        heroSection.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+
+        const handleLeave = () => {
+            heroCloth.setMouse(0, 0, false);
+            heroCloth.targetLeftPin = 0.15;
+            heroCloth.targetRightPin = 0.15;
+        };
+
+        heroSection.addEventListener('mouseleave', handleLeave);
+        heroSection.addEventListener('touchend', handleLeave);
+
+        window.addEventListener('resize', () => {
+            if (heroCloth) heroCloth.resize();
+        });
+    } else {
+        heroCloth.destroy();
+    }
 }

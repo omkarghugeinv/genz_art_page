@@ -43,9 +43,9 @@
     <canvas id="webgl-canvas"></canvas>
 
     <!-- Mobile Menu Button -->
-    <div class="mobile-menu-btn magnetic">
-        <i class="fas fa-bars"></i>
-    </div>
+    <button class="mobile-menu-btn magnetic" aria-label="Toggle navigation" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
 
     <!-- Navigation -->
     <nav class="magnetic-nav">
@@ -189,27 +189,27 @@
                 <h2 style="font-size: 2.5rem; text-align:center; margin-bottom: 10px;">The Audience Poll</h2>
                 <p style="text-align:center; color: #a1a1aa; margin-bottom: 40px; font-family: 'Outfit';">What kind of theatre moves you the most?</p>
                 
-                <div class="poll-container">
-                    <div class="poll-option magnetic" data-votes="72">
+                <div class="poll-container" role="radiogroup" aria-label="Theatre preferences">
+                    <button type="button" role="radio" aria-checked="false" class="poll-option magnetic" data-votes="72">
                         <div class="poll-fill"></div>
                         <span class="poll-label">Intense Drama</span>
                         <span class="poll-percent">0%</span>
-                    </div>
-                    <div class="poll-option magnetic" data-votes="45">
+                    </button>
+                    <button type="button" role="radio" aria-checked="false" class="poll-option magnetic" data-votes="45">
                         <div class="poll-fill"></div>
                         <span class="poll-label">Satirical Comedy</span>
                         <span class="poll-percent">0%</span>
-                    </div>
-                    <div class="poll-option magnetic" data-votes="89">
+                    </button>
+                    <button type="button" role="radio" aria-checked="false" class="poll-option magnetic" data-votes="89">
                         <div class="poll-fill"></div>
                         <span class="poll-label">Social Realism</span>
                         <span class="poll-percent">0%</span>
-                    </div>
-                    <div class="poll-option magnetic" data-votes="30">
+                    </button>
+                    <button type="button" role="radio" aria-checked="false" class="poll-option magnetic" data-votes="30">
                         <div class="poll-fill"></div>
                         <span class="poll-label">Musical Theatre</span>
                         <span class="poll-percent">0%</span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </section>
@@ -220,20 +220,20 @@
             <div class="content-wrapper">
                 <h2 class="reveal">Behind the Curtains</h2>
                 <div class="masonry-gallery">
-                    <div class="gallery-item reveal" data-src="images/Activity pictures/Gallery1.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery1.webp" alt="Stage 1"></div>
-                    <div class="gallery-item reveal tall" data-src="images/Activity pictures/posters/poster11.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster11.webp" alt="Poster 1"></div>
-                    <div class="gallery-item reveal" data-src="images/Activity pictures/Gallery11.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery11.webp" alt="Performance 1"></div>
-                    <div class="gallery-item reveal wide" data-src="images/Activity pictures/Gallery21.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery21.webp" alt="Performance 2"></div>
-                    <div class="gallery-item reveal" data-src="images/Activity pictures/posters/poster7.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster7.webp" alt="Poster 2"></div>
-                    <div class="gallery-item reveal tall" data-src="images/Activity pictures/Gallery5.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery5.webp" alt="Performance 3"></div>
+                    <div class="gallery-item reveal" data-src="images/Activity pictures/Gallery1.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery1.webp" width="600" height="400" alt="Actors performing a dramatic scene on stage"></div>
+                    <div class="gallery-item reveal tall" data-src="images/Activity pictures/posters/poster11.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster11.webp" width="400" height="800" alt="Promotional poster for an upcoming production"></div>
+                    <div class="gallery-item reveal" data-src="images/Activity pictures/Gallery11.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery11.webp" width="600" height="400" alt="Intense emotional moment during a play"></div>
+                    <div class="gallery-item reveal wide" data-src="images/Activity pictures/Gallery21.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery21.webp" width="800" height="400" alt="Full cast bowing at the end of a performance"></div>
+                    <div class="gallery-item reveal" data-src="images/Activity pictures/posters/poster7.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster7.webp" width="400" height="600" alt="Artistic poster featuring surreal elements"></div>
+                    <div class="gallery-item reveal tall" data-src="images/Activity pictures/Gallery5.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery5.webp" width="400" height="800" alt="Actor giving a monologue under a spotlight"></div>
                 </div>
             </div>
         </section>
 
         <!-- Lightbox -->
         <div id="lightbox" class="lightbox">
-            <span class="lightbox-close">&times;</span>
-            <img id="lightbox-img" src="" alt="Expanded view">
+            <button class="lightbox-close" aria-label="Close modal">&times;</button>
+            <img id="lightbox-img" src="" alt="Enlarged gallery image">
         </div>
 
         <!-- Contact Section -->
@@ -247,8 +247,8 @@
                         <p><i class="fas fa-envelope"></i> artistichumansinfo@gmail.com</p>
                         <p><i class="fas fa-phone"></i> +91 9930732829</p>
                         <div class="social-links">
-                            <a href="https://www.facebook.com/artistichumans/" target="_blank" class="magnetic"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.instagram.com/theartistichumans/" target="_blank" class="magnetic"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook" class="magnetic"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram" class="magnetic"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="tally-form">
@@ -267,14 +267,14 @@
             <div class="footer-logo">Artistic Humans</div>
             <p class="footer-tagline">Empowering Art, Creating Communities.</p>
             <div class="footer-links">
-                <a href="https://www.facebook.com/artistichumans/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/theartistichumans/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram"><i class="fab fa-instagram"></i></a>
             </div>
             <a href="#intro" class="back-to-top magnetic">
                 <i class="fas fa-arrow-up"></i>
                 <span>Back to Top</span>
             </a>
-            <p class="footer-credits">&copy; 2026 Artistic Humans. Created by <a href="https://twitter.com/vikrantbhat1022" target="_blank">Vikrant Bhat</a> & <a href="https://www.linkedin.com/in/omkarghugeinv/" target="_blank">Omkar Ghuge</a>.</p>
+            <p class="footer-credits">&copy; 2026 Artistic Humans. Created by <a href="https://twitter.com/vikrantbhat1022" target="_blank" rel="noopener noreferrer">Vikrant Bhat</a> & <a href="https://www.linkedin.com/in/omkarghugeinv/" target="_blank" rel="noopener noreferrer">Omkar Ghuge</a>.</p>
         </div>
     </footer>
 
