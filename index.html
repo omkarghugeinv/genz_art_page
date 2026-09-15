@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artistic Humans | Drama & Theatre Portfolio</title>
+    <meta name="description" content="Artistic Humans — India's youngest community of creators, actors, and changemakers. Award-winning theatre productions, curated experiences, and a platform for every creative human.">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Artistic Humans | Drama & Theatre Portfolio">
+    <meta property="og:description" content="Empowering Art, Creating Communities. Award-winning theatre, curated events, and a community of young creators.">
+    <meta property="og:image" content="images/Activity pictures/Gallery8.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Artistic Humans | Drama & Theatre Portfolio">
+    <meta name="twitter:description" content="Empowering Art, Creating Communities. Award-winning theatre, curated events, and a community of young creators.">
+    <meta name="twitter:image" content="images/Activity pictures/Gallery8.webp">
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,6 +26,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">AH.</div>
+            <div class="curtain-left"></div>
+            <div class="curtain-right"></div>
+        </div>
+    </div>
+
     <!-- Custom Cursor (Manus) -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
@@ -28,17 +51,18 @@
     <nav class="magnetic-nav">
         <div class="logo magnetic">AH.</div>
         <ul class="nav-links">
-            <li class="magnetic"><a href="#intro">Act I</a></li>
-            <li class="magnetic"><a href="#about">The Cast</a></li>
-            <li class="magnetic"><a href="#work">Productions</a></li>
-            <li class="magnetic"><a href="#gallery">Gallery</a></li>
-            <li class="magnetic"><a href="#contact">Auditions</a></li>
+            <li class="magnetic"><a href="#intro" class="nav-link active">Act I</a></li>
+            <li class="magnetic"><a href="#about" class="nav-link">The Cast</a></li>
+            <li class="magnetic"><a href="#work" class="nav-link">Productions</a></li>
+            <li class="magnetic"><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li class="magnetic"><a href="#contact" class="nav-link">Auditions</a></li>
         </ul>
     </nav>
 
     <main>
         <!-- Intro Section -->
         <section id="intro" class="section hero-section">
+            <div class="section-transition"></div>
             <div class="content-wrapper">
                 <h1 class="split-text">Artistic<br><span class="accent-primary">Humans</span></h1>
                 <p class="subtitle fade-up">Empowering Art, Creating Communities. Welcome to the Stage.</p>
@@ -51,15 +75,17 @@
 
         <!-- Vision Section -->
         <section class="section vision-section">
+            <div class="section-transition"></div>
             <div class="content-wrapper glass-card reveal">
                 <h2 class="title">Our Vision</h2>
-                <p class="quote">"We are working to build the World’s largest community of creators. A space for those who aspire to make the world better through stories and theatrical creativity."</p>
+                <p class="quote">"We are working to build the World's largest community of creators. A space for those who aspire to make the world better through stories and theatrical creativity."</p>
                 <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery8.webp" class="floating-img" alt="Theatre Vision">
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="section about-section">
+            <div class="section-transition"></div>
             <div class="content-wrapper">
                 <div class="about-grid">
                     <div class="about-text reveal">
@@ -78,25 +104,71 @@
             </div>
         </section>
 
-        <!-- Work Section -->
+        <!-- Work Section — Horizontal Scroll Timeline -->
         <section id="work" class="section work-section">
+            <div class="section-transition"></div>
             <div class="content-wrapper">
                 <h2 class="reveal">Our Productions</h2>
-                <div class="cards-container">
-                    <div class="work-card reveal magnetic">
-                        <i class="fas fa-theater-masks card-icon"></i>
-                        <h3>Theatre & Plays</h3>
-                        <p>Producing award-winning plays like 'The Artist', 'Hum Sab Ek Hai', and 'Kanchan Kachrawali'.</p>
+                <div class="timeline-wrapper">
+                    <div class="timeline-track">
+                        <div class="timeline-item reveal">
+                            <div class="timeline-year">2018</div>
+                            <div class="timeline-card magnetic">
+                                <i class="fas fa-trophy card-icon"></i>
+                                <h3>'The Artist'</h3>
+                                <p>Our most celebrated play — won 10 accolades across India including Best Play Award at two prestigious National Theatre Festivals. Released commercially.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <div class="timeline-year">2019</div>
+                            <div class="timeline-card magnetic">
+                                <i class="fas fa-theater-masks card-icon"></i>
+                                <h3>'Hum Sab Ek Hai'</h3>
+                                <p>A powerful collaboration with MCF Club exploring themes of unity and collective identity through theatrical storytelling.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <div class="timeline-year">2019</div>
+                            <div class="timeline-card magnetic">
+                                <i class="fas fa-star card-icon"></i>
+                                <h3>'Kanchan Kachrawali'</h3>
+                                <p>Produced with Gulabgun Sab Seva Sanstha — a moving play that connected deeply with community audiences.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <div class="timeline-year">2019</div>
+                            <div class="timeline-card magnetic">
+                                <i class="fas fa-flag card-icon"></i>
+                                <h3>'Atulya Bharat'</h3>
+                                <p>A tribute to Mahatma Gandhi's 150th Birth Anniversary — a short play in collaboration with MCF Club celebrating the spirit of India.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="work-card reveal magnetic">
-                        <i class="fas fa-users card-icon"></i>
-                        <h3>AH Communities</h3>
-                        <p>Our flagship youth initiative where scholars and actors craft innovative community policies.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section class="section awards-section">
+            <div class="section-transition"></div>
+            <div class="content-wrapper">
+                <h2 class="reveal">Accolades & Recognition</h2>
+                <div class="awards-grid">
+                    <div class="award-card reveal magnetic">
+                        <div class="award-number">10</div>
+                        <p>Accolades won across India</p>
                     </div>
-                    <div class="work-card reveal magnetic">
-                        <i class="fas fa-microphone card-icon"></i>
-                        <h3>Curating Experiences</h3>
-                        <p>Customized event designs, live performances, and theatrical workshops that leave a mark.</p>
+                    <div class="award-card reveal magnetic">
+                        <div class="award-number">2×</div>
+                        <p>Best Play Award at National Theatre Festivals</p>
+                    </div>
+                    <div class="award-card reveal magnetic">
+                        <div class="award-number">5+</div>
+                        <p>Original theatrical productions</p>
+                    </div>
+                    <div class="award-card reveal magnetic">
+                        <div class="award-number">∞</div>
+                        <p>Lives touched through art & community</p>
                     </div>
                 </div>
             </div>
@@ -104,21 +176,29 @@
 
         <!-- Gallery Section -->
         <section id="gallery" class="section gallery-section">
+            <div class="section-transition"></div>
             <div class="content-wrapper">
                 <h2 class="reveal">Behind the Curtains</h2>
                 <div class="masonry-gallery">
-                    <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery1.webp" alt="Stage 1"></div>
-                    <div class="gallery-item reveal tall"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster11.webp" alt="Poster 1"></div>
-                    <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery11.webp" alt="Performance 1"></div>
-                    <div class="gallery-item reveal wide"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery21.webp" alt="Performance 2"></div>
-                    <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster7.webp" alt="Poster 2"></div>
-                    <div class="gallery-item reveal tall"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery5.webp" alt="Performance 3"></div>
+                    <div class="gallery-item reveal" data-src="images/Activity pictures/Gallery1.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery1.webp" alt="Stage 1"></div>
+                    <div class="gallery-item reveal tall" data-src="images/Activity pictures/posters/poster11.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster11.webp" alt="Poster 1"></div>
+                    <div class="gallery-item reveal" data-src="images/Activity pictures/Gallery11.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery11.webp" alt="Performance 1"></div>
+                    <div class="gallery-item reveal wide" data-src="images/Activity pictures/Gallery21.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery21.webp" alt="Performance 2"></div>
+                    <div class="gallery-item reveal" data-src="images/Activity pictures/posters/poster7.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster7.webp" alt="Poster 2"></div>
+                    <div class="gallery-item reveal tall" data-src="images/Activity pictures/Gallery5.webp"><img loading="lazy" decoding="async" src="images/Activity pictures/Gallery5.webp" alt="Performance 3"></div>
                 </div>
             </div>
         </section>
 
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-img" src="" alt="Expanded view">
+        </div>
+
         <!-- Contact Section -->
         <section id="contact" class="section contact-section">
+            <div class="section-transition"></div>
             <div class="content-wrapper glass-card reveal">
                 <h2>Join the <span class="accent-primary">Cast</span></h2>
                 <div class="contact-grid">
@@ -127,8 +207,8 @@
                         <p><i class="fas fa-envelope"></i> artistichumansinfo@gmail.com</p>
                         <p><i class="fas fa-phone"></i> +91 9930732829</p>
                         <div class="social-links">
-                            <a href="#" class="magnetic"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="magnetic"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/artistichumans/" target="_blank" class="magnetic"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/theartistichumans/" target="_blank" class="magnetic"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="tally-form">
@@ -140,6 +220,23 @@
         </section>
 
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">Artistic Humans</div>
+            <p class="footer-tagline">Empowering Art, Creating Communities.</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/artistichumans/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/theartistichumans/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="#intro" class="back-to-top magnetic">
+                <i class="fas fa-arrow-up"></i>
+                <span>Back to Top</span>
+            </a>
+            <p class="footer-credits">&copy; 2026 Artistic Humans. Created by <a href="https://twitter.com/vikrantbhat1022" target="_blank">Vikrant Bhat</a> & <a href="https://www.linkedin.com/in/omkarghugeinv/" target="_blank">Omkar Ghuge</a>.</p>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="webgl-bg.js"></script>
