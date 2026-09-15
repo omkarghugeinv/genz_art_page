@@ -136,10 +136,11 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 
 .interactive-curtain {
     position: absolute; top: 0; width: 50vw; height: 100%;
-    background: linear-gradient(90deg, #3d0514, var(--primary), #3d0514);
+    background-image: 
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.4) 40px, rgba(0,0,0,0.4) 80px),
+        linear-gradient(90deg, #3d0514, var(--primary), #3d0514);
     z-index: 10;
     box-shadow: 0 0 50px rgba(0,0,0,0.9);
-    background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.2) 40px, rgba(0,0,0,0.2) 80px);
     pointer-events: none; /* Let mouse interact with hero */
 }
 .curtain-l { left: 0; transform-origin: left; transform: scaleX(0.15); border-right: 2px solid var(--accent); }
