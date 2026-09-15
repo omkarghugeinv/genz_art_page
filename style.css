@@ -158,14 +158,33 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 .about-img img { width: 100%; border-radius: 4px; filter: grayscale(20%) contrast(1.2); border: 1px solid rgba(212, 175, 55, 0.3); }
 
 /* ===== Work / Timeline ===== */
-.work-section h2 { font-size: 3.5rem; text-align: center; margin-bottom: 60px; }
-
-.timeline-wrapper { overflow: hidden; position: relative; }
-.timeline-track {
-    display: flex; gap: 40px; padding: 20px 0 40px;
-    /* Horizontal scroll via GSAP will move this */
+.work-section h2 { font-size: 3.5rem; margin-bottom: 0; }
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; flex-wrap: wrap; gap: 20px;}
+.timeline-nav { display: flex; gap: 15px; }
+.nav-btn {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: transparent; border: 1px solid var(--accent);
+    color: var(--accent); font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
 }
-.timeline-item { min-width: 350px; flex-shrink: 0; }
+.nav-btn:hover { background: var(--accent); color: var(--dark-bg); transform: scale(1.1); }
+
+.timeline-wrapper {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+}
+.timeline-wrapper::-webkit-scrollbar { display: none; }
+
+.timeline-track {
+    display: flex; gap: 40px;
+    width: max-content;
+}
+.timeline-item { min-width: 350px; flex-shrink: 0; scroll-snap-align: start; }
 .timeline-year {
     font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700;
     color: var(--accent); margin-bottom: 15px; letter-spacing: 2px;

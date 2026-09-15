@@ -157,29 +157,20 @@ function setActiveNav(sectionId) {
     });
 }
 
-// ===== HORIZONTAL TIMELINE SCROLL =====
-const timelineTrack = document.querySelector('.timeline-track');
+// ===== HORIZONTAL TIMELINE NAVIGATION =====
 const timelineWrapper = document.querySelector('.timeline-wrapper');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
 
-if (timelineTrack && timelineWrapper) {
-    // Calculate how far to scroll
-    const getScrollAmount = () => {
-        const trackWidth = timelineTrack.scrollWidth;
-        const wrapperWidth = timelineWrapper.offsetWidth;
-        return -(trackWidth - wrapperWidth);
-    };
+if (timelineWrapper && prevBtn && nextBtn) {
+    const scrollAmount = 390; // Card width (350) + gap (40)
 
-    gsap.to(timelineTrack, {
-        x: getScrollAmount,
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".work-section",
-            start: "top 20%",
-            end: () => `+=${timelineTrack.scrollWidth - timelineWrapper.offsetWidth}`,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-        }
+    nextBtn.addEventListener('click', () => {
+        timelineWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+        timelineWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     });
 }
 
