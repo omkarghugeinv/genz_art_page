@@ -62,6 +62,8 @@
     <main>
         <!-- Intro Section -->
         <section id="intro" class="section hero-section">
+            <div class="interactive-curtain curtain-l"></div>
+            <div class="interactive-curtain curtain-r"></div>
             <div class="section-transition"></div>
             <div class="content-wrapper">
                 <h1 class="split-text">Artistic<br><span class="accent-primary">Humans</span></h1>
@@ -161,20 +163,52 @@
                 <h2 class="reveal">Accolades & Recognition</h2>
                 <div class="awards-grid">
                     <div class="award-card reveal magnetic">
-                        <div class="award-number">10</div>
+                        <div class="award-number" data-target="10">10</div>
                         <p>Accolades won across India</p>
                     </div>
                     <div class="award-card reveal magnetic">
-                        <div class="award-number">2×</div>
+                        <div class="award-number" data-target="2">2×</div>
                         <p>Best Play Award at National Theatre Festivals</p>
                     </div>
                     <div class="award-card reveal magnetic">
-                        <div class="award-number">5+</div>
+                        <div class="award-number" data-target="5">5+</div>
                         <p>Original theatrical productions</p>
                     </div>
                     <div class="award-card reveal magnetic">
-                        <div class="award-number">∞</div>
+                        <div class="award-number" data-target="1000">1000+</div>
                         <p>Lives touched through art & community</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Survey Section -->
+        <section class="section survey-section">
+            <div class="section-transition"></div>
+            <div class="content-wrapper glass-card reveal">
+                <h2 style="font-size: 2.5rem; text-align:center; margin-bottom: 10px;">The Audience Poll</h2>
+                <p style="text-align:center; color: #a1a1aa; margin-bottom: 40px; font-family: 'Outfit';">What kind of theatre moves you the most?</p>
+                
+                <div class="poll-container">
+                    <div class="poll-option magnetic" data-votes="72">
+                        <div class="poll-fill"></div>
+                        <span class="poll-label">Intense Drama</span>
+                        <span class="poll-percent">0%</span>
+                    </div>
+                    <div class="poll-option magnetic" data-votes="45">
+                        <div class="poll-fill"></div>
+                        <span class="poll-label">Satirical Comedy</span>
+                        <span class="poll-percent">0%</span>
+                    </div>
+                    <div class="poll-option magnetic" data-votes="89">
+                        <div class="poll-fill"></div>
+                        <span class="poll-label">Social Realism</span>
+                        <span class="poll-percent">0%</span>
+                    </div>
+                    <div class="poll-option magnetic" data-votes="30">
+                        <div class="poll-fill"></div>
+                        <span class="poll-label">Musical Theatre</span>
+                        <span class="poll-percent">0%</span>
                     </div>
                 </div>
             </div>

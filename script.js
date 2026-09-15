@@ -157,6 +157,106 @@ function setActiveNav(sectionId) {
     });
 }
 
+// ===== INTERACTIVE STAGE CURTAINS (HERO) =====
+const curtainL = document.querySelector('.curtain-l');
+const curtainR = document.querySelector('.curtain-r');
+const heroSection = document.querySelector('.hero-section');
+
+if (heroSection && curtainL && curtainR) {
+    heroSection.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const centerX = window.innerWidth / 2;
+        // Dist is 0 when mouse is at center, 1 when at edge
+        const dist = Math.abs(mouseX - centerX) / centerX; 
+        
+        // When mouse is near center, curtains are open (scaleX ~ 0.1)
+        // When mouse is near edges, curtains pull in slightly (scaleX ~ 0.35)
+        const scale = 0.15 + (dist * 0.2);
+        
+        gsap.to(curtainL, { scaleX: scale, duration: 0.5, ease: "power2.out" });
+        gsap.to(curtainR, { scaleX: scale, duration: 0.5, ease: "power2.out" });
+    });
+    
+    // Snap back slightly when mouse leaves hero
+    heroSection.addEventListener('mouseleave', () => {
+        gsap.to([curtainL, curtainR], { scaleX: 0.15, duration: 1, ease: "elastic.out(1, 0.4)" });
+    });
+}
+
+// ===== NUMBER COUNTERS (AWARDS) =====
+const numbers = document.querySelectorAll('.award-number');
+numbers.forEach(num => {
+    const targetVal = parseInt(num.getAttribute('data-target'));
+    const originalText = num.innerText;
+    const suffix = originalText.replace(/[0-9]/g, '');
+    
+    if (!isNaN(targetVal)) {
+        num.innerText = "0" + suffix; // Reset to 0
+        ScrollTrigger.create({
+            trigger: num,
+            start: "top 85%",
+            once: true, // Only animate once
+            onEnter: () => {
+                gsap.to(num, {
+                    innerHTML: targetVal,
+                    duration: 2.5,
+                    ease: "power2.out",
+                    snap: { innerHTML: 1 }, // Ensure integers
+                    onUpdate: function() {
+                        num.innerHTML = this.targets()[0].innerHTML + suffix;
+                    }
+                });
+            }
+        });
+    }
+});
+
+// ===== INTERACTIVE SURVEY POLL =====
+const pollOptions = document.querySelectorAll('.poll-option');
+let hasVoted = false;
+
+pollOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        if (hasVoted) return; // Only allow one vote
+        hasVoted = true;
+        
+        let totalVotes = 0;
+        pollOptions.forEach(opt => totalVotes += parseInt(opt.getAttribute('data-votes')));
+        totalVotes += 1; // Add the user's vote
+        
+        // Add user vote to clicked option
+        const currentVotes = parseInt(option.getAttribute('data-votes')) + 1;
+        option.setAttribute('data-votes', currentVotes);
+        
+        // Animate fills and percentages
+        pollOptions.forEach(opt => {
+            const votes = parseInt(opt.getAttribute('data-votes'));
+            const percent = Math.round((votes / totalVotes) * 100);
+            const fill = opt.querySelector('.poll-fill');
+            const percentText = opt.querySelector('.poll-percent');
+            
+            opt.classList.add('voted');
+            opt.style.setProperty('--target-width', `${percent}%`);
+            
+            // Animate percentage text
+            gsap.to(percentText, {
+                innerHTML: percent,
+                duration: 1.5,
+                snap: { innerHTML: 1 },
+                onUpdate: function() {
+                    percentText.innerHTML = this.targets()[0].innerHTML + "%";
+                }
+            });
+            
+            // Highlight chosen option
+            if (opt === option) {
+                opt.style.borderColor = "var(--accent)";
+                fill.style.background = "linear-gradient(90deg, rgba(212,175,55,0.5), rgba(201,24,74,0.5))";
+            }
+        });
+    });
+});
+
 // ===== HORIZONTAL TIMELINE NAVIGATION =====
 const timelineWrapper = document.querySelector('.timeline-wrapper');
 const prevBtn = document.querySelector('.prev-btn');
