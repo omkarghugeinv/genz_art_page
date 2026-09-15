@@ -47,13 +47,19 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 }
 .curtain-left, .curtain-right {
     position: absolute; top: 0; width: 50%; height: 100%;
-    background: var(--primary); z-index: 1;
-    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    /* Realistic velvet texture & folds */
+    background: linear-gradient(90deg, #3d0514, var(--primary), #3d0514);
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.3) 40px, rgba(0,0,0,0.3) 80px);
+    box-shadow: 0 0 50px rgba(0,0,0,0.9);
+    z-index: 1;
+    /* Longer transition with bunching effect */
+    transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
-.curtain-left { left: 0; transform-origin: left; }
-.curtain-right { right: 0; transform-origin: right; }
-#preloader.loaded .curtain-left { transform: translateX(-100%); }
-#preloader.loaded .curtain-right { transform: translateX(100%); }
+.curtain-left { left: 0; transform-origin: left; border-right: 3px solid var(--accent); }
+.curtain-right { right: 0; transform-origin: right; border-left: 3px solid var(--accent); }
+/* Bunch up (scale to 0 width) instead of sliding flatly */
+#preloader.loaded .curtain-left { transform: scaleX(0); }
+#preloader.loaded .curtain-right { transform: scaleX(0); }
 
 /* ===== WebGL Background ===== */
 #webgl-canvas {
