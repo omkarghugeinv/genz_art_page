@@ -960,11 +960,11 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
-/* Enhanced 4-Column Footer */
+/* Enhanced 3-Column Footer */
 .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1.3fr 1.4fr;
-    gap: 40px;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: 50px;
     text-align: left;
     margin-bottom: 40px;
 }
