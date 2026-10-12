@@ -439,3 +439,30 @@ if (window.matchMedia("(pointer: fine)").matches) {
         }
     }
 }
+
+
+// ===== GALLERY FILTERING =====
+const filterBtns = document.querySelectorAll('.filter-btn');
+const galleryItemsAll = document.querySelectorAll('.gallery-item');
+
+if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filterValue = btn.getAttribute('data-filter');
+
+            galleryItemsAll.forEach(item => {
+                const itemCat = item.getAttribute('data-category') || '';
+                if (filterValue === 'all' || itemCat.includes(filterValue)) {
+                    item.style.display = 'block';
+                    if (typeof gsap !== 'undefined') {
+                        gsap.fromTo(item, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' });
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}

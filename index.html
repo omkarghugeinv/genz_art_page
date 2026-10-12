@@ -293,35 +293,113 @@
             </div>
         </section>
 
-        <!-- Gallery Section -->
+                <!-- Gallery Section -->
         <section id="gallery" class="section gallery-section">
             <div class="section-transition"></div>
             <div class="content-wrapper">
-                <h2 class="reveal">Behind the Curtains</h2>
+                <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;" class="reveal">
+                    <span class="subpage-tag">Behind the Curtains</span>
+                    <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 12px;">Visual Archives & Productions</h2>
+                    <p style="color: #a1a1aa; font-size: 1.1rem; line-height: 1.6;">From raw stage rehearsals and community workshops to landmark theatrical productions and original posters.</p>
+                </div>
+
+                <!-- Gallery Filter Tabs -->
+                <div class="gallery-filters reveal">
+                    <button class="filter-btn active magnetic" data-filter="all">All Visuals</button>
+                    <button class="filter-btn magnetic" data-filter="stage">Stage Productions</button>
+                    <button class="filter-btn magnetic" data-filter="community">Cast & Community</button>
+                    <button class="filter-btn magnetic" data-filter="posters">Original Posters</button>
+                </div>
+
                 <div class="masonry-gallery">
-                    <div class="gallery-item reveal wide" data-src="images/gallery/rashtragranth_ensemble.webp">
-                        <img loading="lazy" decoding="async" src="images/gallery/rashtragranth_ensemble.webp" width="1200" height="849" alt="Rashtragranth — Mega Stage Ensemble with 40+ Artists">
+                    <!-- Stage: Rashtragranth Ensemble (Wide) -->
+                    <div class="gallery-item reveal wide" data-category="stage" data-src="images/gallery/rashtragranth_ensemble.webp">
+                        <img loading="lazy" decoding="async" src="images/gallery/rashtragranth_ensemble.webp" alt="Rashtragranth — 40+ Artist Mega Stage Ensemble">
                     </div>
-                    <div class="gallery-item reveal tall" data-src="images/darshan/yugpurush_gandhi.webp">
-                        <img loading="lazy" decoding="async" src="images/darshan/yugpurush_gandhi.webp" width="1000" height="1435" alt="Darshan Mahajan as Mahatma Gandhi in Yugpurush">
+
+                    <!-- Stage: Mahatma Gandhi in Yugpurush (Tall) -->
+                    <div class="gallery-item reveal tall" data-category="stage" data-src="images/darshan/yugpurush_gandhi.webp">
+                        <img loading="lazy" decoding="async" src="images/darshan/yugpurush_gandhi.webp" alt="Darshan Mahajan as Mahatma Gandhi in Yugpurush">
                     </div>
-                    <div class="gallery-item reveal" data-src="images/gallery/bhumika_live.webp">
-                        <img loading="lazy" decoding="async" src="images/gallery/bhumika_live.webp" width="800" height="533" alt="Bhumika — Award-Winning Live Stage Production">
+
+                    <!-- Community: Gallery1 (Original Activity Picture) -->
+                    <div class="gallery-item reveal" data-category="community" data-src="images/Activity pictures/Gallery1.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery1.webp" alt="Dramatic stage rehearsal and acting workshop">
                     </div>
-                    <div class="gallery-item reveal wide" data-src="images/darshan/darshan_stage_bow.webp">
-                        <img loading="lazy" decoding="async" src="images/darshan/darshan_stage_bow.webp" width="1200" height="664" alt="Auditorium Bow and Final Curtain Call">
+
+                    <!-- Community: Gallery21 (Original Activity Picture - Wide) -->
+                    <div class="gallery-item reveal wide" data-category="community" data-src="images/Activity pictures/Gallery21.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery21.webp" alt="Full cast bowing at final curtain call">
                     </div>
-                    <div class="gallery-item reveal tall" data-src="images/about/bhumika_poster.webp">
-                        <img loading="lazy" decoding="async" src="images/about/bhumika_poster.webp" width="565" height="800" alt="Official Poster of Bhumika: The Journey Within">
+
+                    <!-- Poster: poster11 (Original Poster - Tall) -->
+                    <div class="gallery-item reveal tall" data-category="posters" data-src="images/Activity pictures/posters/poster11.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster11.webp" alt="Artistic Humans Production Poster">
                     </div>
-                    <div class="gallery-item reveal" data-src="images/gallery/amrit_75_live.webp">
-                        <img loading="lazy" decoding="async" src="images/gallery/amrit_75_live.webp" width="800" height="533" alt="Amrit Mahotsav 75x75x75 Auditorium Performance">
+
+                    <!-- Stage: Bhumika Live -->
+                    <div class="gallery-item reveal" data-category="stage" data-src="images/gallery/bhumika_live.webp">
+                        <img loading="lazy" decoding="async" src="images/gallery/bhumika_live.webp" alt="Bhumika — Award-Winning Live Stage Production">
                     </div>
-                    <div class="gallery-item reveal" data-src="images/gallery/streetplay_circle.webp">
-                        <img loading="lazy" decoding="async" src="images/gallery/streetplay_circle.webp" width="800" height="533" alt="Grassroots Community Street Play Performance">
+
+                    <!-- Community: Gallery49 (Original Ensemble Cast) -->
+                    <div class="gallery-item reveal" data-category="community" data-src="images/Activity pictures/Gallery49.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery49.webp" alt="The Cast & Ensemble Group Portrait">
                     </div>
-                    <div class="gallery-item reveal" data-src="images/darshan/sanskrutik_manch.webp">
-                        <img loading="lazy" decoding="async" src="images/darshan/sanskrutik_manch.webp" width="760" height="800" alt="Sanskrutik Kala Manch Monthly Cultural Stage">
+
+                    <!-- Poster: poster7 (Original Poster) -->
+                    <div class="gallery-item reveal" data-category="posters" data-src="images/Activity pictures/posters/poster7.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/posters/poster7.webp" alt="Theatrical Art Poster">
+                    </div>
+
+                    <!-- Community: Gallery5 (Original Monologue - Tall) -->
+                    <div class="gallery-item reveal tall" data-category="community" data-src="images/Activity pictures/Gallery5.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery5.webp" alt="Actor monologue under spotlight">
+                    </div>
+
+                    <!-- Stage: Darshan Stage Bow (Wide) -->
+                    <div class="gallery-item reveal wide" data-category="stage" data-src="images/darshan/darshan_stage_bow.webp">
+                        <img loading="lazy" decoding="async" src="images/darshan/darshan_stage_bow.webp" alt="Darshan Mahajan onstage bowing to auditorium">
+                    </div>
+
+                    <!-- Community: Gallery11 (Original Expression) -->
+                    <div class="gallery-item reveal" data-category="community" data-src="images/Activity pictures/Gallery11.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery11.webp" alt="Intense emotional theatrical moment">
+                    </div>
+
+                    <!-- Poster: Bhumika Poster (Tall) -->
+                    <div class="gallery-item reveal tall" data-category="posters" data-src="images/about/bhumika_poster.webp">
+                        <img loading="lazy" decoding="async" src="images/about/bhumika_poster.webp" alt="Official Poster of Bhumika: The Journey Within">
+                    </div>
+
+                    <!-- Community: Gallery8 (Original Vision Performance) -->
+                    <div class="gallery-item reveal" data-category="community" data-src="images/Activity pictures/Gallery8.webp">
+                        <img loading="lazy" decoding="async" src="images/Activity pictures/Gallery8.webp" alt="Theatrical Vision Performance">
+                    </div>
+
+                    <!-- Stage: Amrit Mahotsav 75x75x75 -->
+                    <div class="gallery-item reveal" data-category="stage" data-src="images/gallery/amrit_75_live.webp">
+                        <img loading="lazy" decoding="async" src="images/gallery/amrit_75_live.webp" alt="Amrit Mahotsav 75x75x75 Live Stage Performance">
+                    </div>
+
+                    <!-- Community: Street Play Circle -->
+                    <div class="gallery-item reveal" data-category="community" data-src="images/gallery/streetplay_circle.webp">
+                        <img loading="lazy" decoding="async" src="images/gallery/streetplay_circle.webp" alt="Grassroots Street Play in Village Circle">
+                    </div>
+
+                    <!-- Poster: K Se Kalakaar Poster -->
+                    <div class="gallery-item reveal" data-category="posters" data-src="images/darshan/k_se_kalakaar_poster.webp">
+                        <img loading="lazy" decoding="async" src="images/darshan/k_se_kalakaar_poster.webp" alt="K Se Kalakaar 4-Day Festival Poster">
+                    </div>
+
+                    <!-- Stage: Sanskrutik Kala Manch -->
+                    <div class="gallery-item reveal" data-category="stage" data-src="images/darshan/sanskrutik_manch.webp">
+                        <img loading="lazy" decoding="async" src="images/darshan/sanskrutik_manch.webp" alt="Sanskrutik Kala Manch Monthly Cultural Stage">
+                    </div>
+
+                    <!-- Poster: Rashtragranth Poster -->
+                    <div class="gallery-item reveal" data-category="posters" data-src="images/darshan/rashtragranth_poster.webp">
+                        <img loading="lazy" decoding="async" src="images/darshan/rashtragranth_poster.webp" alt="Rashtragranth Constitution Play Official Poster">
                     </div>
                 </div>
             </div>
@@ -333,25 +411,63 @@
             <img id="lightbox-img" src="" alt="Enlarged gallery image">
         </div>
 
-        <!-- Contact / Auditions -->
+                <!-- Contact / Auditions Hub -->
         <section id="contact" class="section contact-section">
             <div class="section-transition"></div>
-            <div class="content-wrapper glass-card reveal">
-                <h2>Join the <span class="accent-primary">Cast</span></h2>
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <h3>Get in Touch</h3>
-                        <p><i class="fas fa-envelope"></i> artistichumansinfo@gmail.com</p>
-                        <p><i class="fas fa-envelope"></i> darshanmahajan95@gmail.com</p>
-                        <p><i class="fas fa-phone"></i> +91 9930732829</p>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook" class="magnetic"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram" class="magnetic"><i class="fab fa-instagram"></i></a>
+            <div class="content-wrapper">
+                <div class="contact-hub-header reveal">
+                    <span class="subpage-tag">Connect With Us</span>
+                    <h2>Step Onto the <span class="accent-primary">Stage</span></h2>
+                    <p style="color: #a1a1aa; font-size: 1.15rem; line-height: 1.6;">Whether you are an artist auditioning for upcoming productions, an educational institution, a corporate partner, or seeking cultural collaborations.</p>
+                </div>
+
+                <!-- Structured 4-Card Contact Grid -->
+                <div class="contact-cards-grid reveal">
+                    <!-- Card 1: Organisation Email -->
+                    <div class="contact-hub-card magnetic">
+                        <div class="contact-hub-icon"><i class="fas fa-envelope-open-text"></i></div>
+                        <h4>General Inquiries</h4>
+                        <p>For institutional partnerships, production inquiries, and media.</p>
+                        <a href="mailto:artistichumansinfo@gmail.com" class="contact-hub-link">artistichumansinfo@gmail.com <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Card 2: Founder Direct -->
+                    <div class="contact-hub-card magnetic">
+                        <div class="contact-hub-icon"><i class="fas fa-user-tie"></i></div>
+                        <h4>Darshan Mahajan</h4>
+                        <p>Founder, Director, Keynote Workshops & Creative Consultancy.</p>
+                        <a href="mailto:darshanmahajan95@gmail.com" class="contact-hub-link">darshanmahajan95@gmail.com <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Card 3: Call & WhatsApp -->
+                    <div class="contact-hub-card magnetic">
+                        <div class="contact-hub-icon"><i class="fas fa-phone-alt"></i></div>
+                        <h4>Call & WhatsApp</h4>
+                        <p>Direct line for urgent production schedules and casting coordination.</p>
+                        <a href="tel:+919930732829" class="contact-hub-link">+91 9930 732 829 <i class="fas fa-phone"></i></a>
+                    </div>
+
+                    <!-- Card 4: Base & Socials -->
+                    <div class="contact-hub-card magnetic">
+                        <div class="contact-hub-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h4>Mumbai, India</h4>
+                        <p>Active across Maharashtra, national festivals, and international tours.</p>
+                        <div style="display: flex; gap: 15px; margin-top: auto;">
+                            <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-size: 1.3rem;" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-size: 1.3rem;" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         </div>
                     </div>
+                </div>
+
+                <!-- Auditions & Network Registration Portal -->
+                <div class="auditions-portal glass-card reveal">
+                    <div style="text-align: center; max-width: 650px; margin: 0 auto 30px;">
+                        <span class="subpage-tag">Casting & Auditions</span>
+                        <h3 style="font-size: 2rem; margin-bottom: 10px;">Artist Network Registration</h3>
+                        <p style="color: #a1a1aa; font-size: 1rem; line-height: 1.6;">Are you an actor, dancer, writer, director, musician, or backstage technician? Register your profile directly into our talent database for current and upcoming auditions.</p>
+                    </div>
                     <div class="tally-form">
-                        <!-- Tally iframe embedded -->
-                        <iframe data-tally-src="https://tally.so/embed/EkVBDr?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" title="Artist Network Registration"></iframe>
+                        <iframe data-tally-src="https://tally.so/embed/EkVBDr?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="320" frameborder="0" marginheight="0" marginwidth="0" title="Artist Network Registration"></iframe>
                     </div>
                 </div>
             </div>
@@ -359,28 +475,65 @@
 
     </main>
 
-    <!-- Footer -->
+        <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-logo">Artistic Humans</div>
-            <p class="footer-tagline">Curiosity to Creation • Empowering Art, Creating Communities.</p>
-            <div class="footer-links">
-                <a href="#intro">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="about-darshan.html">Darshan Mahajan</a>
-                <a href="#work">Productions</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#contact">Auditions & Contact</a>
+        <div class="content-wrapper">
+            <div class="footer-grid">
+                <!-- Col 1: Brand & Philosophy -->
+                <div class="footer-col">
+                    <div class="footer-brand">Artistic Humans</div>
+                    <p class="footer-brand-desc">Curiosity to Creation. A Mumbai-based creative & social-impact organisation using theatre, education, and cultural platforms to turn ideas into public value.</p>
+                    <div class="footer-social-row">
+                        <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#intro">Act I (Home)</a></li>
+                        <li><a href="about.html">About Organisation</a></li>
+                        <li><a href="about-darshan.html">Darshan Mahajan</a></li>
+                        <li><a href="#work">Productions Timeline</a></li>
+                        <li><a href="#gallery">Visual Archives</a></li>
+                        <li><a href="#contact">Auditions & Casting</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Key Milestone Plays -->
+                <div class="footer-col">
+                    <h4>Landmark Works</h4>
+                    <ul>
+                        <li><a href="#work">Rashtragranth (Constitution)</a></li>
+                        <li><a href="#work">Pruthvi Che Shetkari (UN FAO)</a></li>
+                        <li><a href="#work">Amrit Mahotsav 75×75×75</a></li>
+                        <li><a href="#work">Bhumika: The Journey</a></li>
+                        <li><a href="#work">Yugpurush (1,000+ Shows)</a></li>
+                        <li><a href="#work">Sanskrutik Kala Manch</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Direct Connect -->
+                <div class="footer-col">
+                    <h4>Direct Connect</h4>
+                    <ul>
+                        <li><a href="mailto:artistichumansinfo@gmail.com"><i class="fas fa-envelope" style="color:var(--accent); margin-right:8px;"></i> artistichumansinfo@gmail.com</a></li>
+                        <li><a href="mailto:darshanmahajan95@gmail.com"><i class="fas fa-user" style="color:var(--accent); margin-right:8px;"></i> darshanmahajan95@gmail.com</a></li>
+                        <li><a href="tel:+919930732829"><i class="fas fa-phone" style="color:var(--accent); margin-right:8px;"></i> +91 9930 732 829</a></li>
+                        <li style="color:#71717a; font-size:0.95rem; margin-top:5px;"><i class="fas fa-map-marker-alt" style="color:var(--accent); margin-right:8px;"></i> Mumbai, Maharashtra, India</li>
+                    </ul>
+                </div>
             </div>
-            <div class="social-links" style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
-                <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram"><i class="fab fa-instagram"></i></a>
+
+            <div style="border-top: 1px solid var(--glass-border); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <p class="footer-credits">&copy; 2026 Artistic Humans. Profile 2026 Edition. Curated by <a href="https://www.linkedin.com/in/omkarghugeinv/" target="_blank" rel="noopener noreferrer">Omkar Ghuge</a>.</p>
+                <a href="#intro" class="back-to-top magnetic" style="margin-bottom: 0;">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Back to Top</span>
+                </a>
             </div>
-            <a href="#intro" class="back-to-top magnetic">
-                <i class="fas fa-arrow-up"></i>
-                <span>Back to Top</span>
-            </a>
-            <p class="footer-credits">&copy; 2026 Artistic Humans. Profile 2026 Edition.</p>
         </div>
     </footer>
 
