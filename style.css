@@ -15,6 +15,11 @@ html { scroll-behavior: smooth; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--dark-bg);
@@ -377,7 +382,15 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     .masonry-gallery { grid-template-columns: 1fr; grid-auto-rows: 220px; gap: 15px; }
     .gallery-item.wide, .gallery-item.tall { grid-column: span 1 !important; grid-row: span 1 !important; }
     .showcase-grid { grid-template-columns: 1fr; gap: 20px; }
-    .profile-card-img { aspect-ratio: 1 / 1; max-height: 320px; }
+    .profile-card-img, .darshan-spotlight-img {
+        aspect-ratio: 1 / 1;
+        max-height: 320px;
+        object-position: center top;
+    }
+    .endorsement-frame {
+        height: 280px;
+        padding: 10px;
+    }
     .awards-grid { grid-template-columns: 1fr 1fr; }
     
     .glass-card { padding: 40px 20px; }
@@ -529,11 +542,25 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
 }
 .profile-card-img {
     width: 100%;
+    height: auto !important;
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center top;
     display: block;
     background: #09090b;
+}
+.darshan-spotlight-img {
+    width: 100%;
+    max-width: 460px;
+    height: auto !important;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+    display: block;
+    margin: 0 auto;
 }
 .profile-card-body {
     padding: 30px 25px;
@@ -801,6 +828,7 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 30px;
+    align-items: stretch;
 }
 .endorsement-card {
     background: var(--glass-bg);
@@ -808,30 +836,46 @@ h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 .endorsement-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+.endorsement-frame {
+    width: 100%;
+    height: 380px;
+    background: #080808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--glass-border);
 }
 .endorsement-img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
     object-fit: contain;
-    background: #050505;
     display: block;
-    padding: 10px;
-    transition: transform 0.5s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    transition: transform 0.4s ease;
 }
 .endorsement-card:hover .endorsement-img {
     transform: scale(1.03);
 }
 .endorsement-caption {
-    padding: 15px;
-    font-size: 0.9rem;
+    padding: 18px 15px;
+    font-size: 0.95rem;
     color: #d4d4d8;
     text-align: center;
-    border-top: 1px solid var(--glass-border);
+    margin-top: auto;
 }
 
 /* Hero Preview Dual-Cards on index.html */
