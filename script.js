@@ -264,13 +264,18 @@ const lightboxImg = document.getElementById('lightbox-img');
 const lightboxClose = document.querySelector('.lightbox-close');
 const galleryItems = document.querySelectorAll('.gallery-item[data-src]');
 
+function openLightbox(src) {
+    if (lightboxImg && lightbox) {
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+    }
+}
+window.openLightbox = openLightbox;
+
 galleryItems.forEach(item => {
     item.addEventListener('click', () => {
         const src = item.getAttribute('data-src');
-        if (lightboxImg && lightbox) {
-            lightboxImg.src = src;
-            lightbox.classList.add('active');
-        }
+        openLightbox(src);
     });
 });
 

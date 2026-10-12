@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Artistic Humans | Curiosity to Creation</title>
+    <meta name="description" content="Artistic Humans — A Mumbai-based creative & social-impact organisation using theatre, education, and cultural platforms to turn ideas into public value.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About Artistic Humans | Curiosity to Creation">
+    <meta property="og:description" content="Art that moves people and builds possibility. 25+ original productions, 200k+ audiences reached, 15+ years in theatre.">
+    <meta property="og:image" content="images/about/team_creators.webp">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- GSAP for Motion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Three.js Stage Dust Particles Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn magnetic" aria-label="Toggle navigation" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="magnetic-nav">
+        <a href="index.html" class="logo magnetic" style="text-decoration:none; color:inherit;">AH.</a>
+        <ul class="nav-links">
+            <li class="magnetic"><a href="index.html#intro" class="nav-link">Home</a></li>
+            <li class="magnetic"><a href="about.html" class="nav-link active">About Us</a></li>
+            <li class="magnetic"><a href="about-darshan.html" class="nav-link">Founder</a></li>
+            <li class="magnetic"><a href="index.html#work" class="nav-link">Productions</a></li>
+            <li class="magnetic"><a href="index.html#gallery" class="nav-link">Gallery</a></li>
+            <li class="magnetic"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Subpage Header -->
+        <header class="subpage-header">
+            <div class="content-wrapper">
+                <span class="subpage-tag reveal">The Organisation • Profile 2026</span>
+                <h1 class="subpage-title reveal">Curiosity to <span class="accent-primary">Creation</span></h1>
+                <p class="subpage-subtitle reveal">Art that moves people — and builds possibility. A Mumbai-based creative and social-impact movement using theatre, education, and cultural platforms to turn ideas into public value.</p>
+                <div class="btn-group reveal">
+                    <a href="#pillars" class="btn btn-primary magnetic">Our 5 Pillars</a>
+                    <a href="#milestones" class="btn btn-outline magnetic">Key Milestones</a>
+                    <a href="about-darshan.html" class="btn btn-outline magnetic"><i class="fas fa-user"></i> Meet The Founder</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick Stats Strip -->
+        <section class="section" style="min-height: auto; padding: 20px 20px 60px;">
+            <div class="content-wrapper">
+                <div class="stats-strip reveal">
+                    <div class="stat-pill magnetic">
+                        <div class="stat-pill-num">15+</div>
+                        <div class="stat-pill-label">Years in Theatre</div>
+                    </div>
+                    <div class="stat-pill magnetic">
+                        <div class="stat-pill-num">25+</div>
+                        <div class="stat-pill-label">Original Productions</div>
+                    </div>
+                    <div class="stat-pill magnetic">
+                        <div class="stat-pill-num">150+</div>
+                        <div class="stat-pill-label">Artists & Technicians</div>
+                    </div>
+                    <div class="stat-pill magnetic">
+                        <div class="stat-pill-num">200K+</div>
+                        <div class="stat-pill-label">Audiences Reached</div>
+                    </div>
+                    <div class="stat-pill magnetic">
+                        <div class="stat-pill-num">3</div>
+                        <div class="stat-pill-label">Working Languages</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who We Are & Vision/Mission Section -->
+        <section class="section" style="padding-top: 20px;">
+            <div class="section-transition"></div>
+            <div class="content-wrapper">
+                <div class="about-grid">
+                    <div class="about-text reveal">
+                        <h2><span class="accent-gold">Who</span> We Are</h2>
+                        <p style="font-size: 1.15rem; line-height: 1.8; color: #e4e4e7; margin-bottom: 20px;">
+                            We are a team of creators and innovators, united by our love for art and a desire to break barriers. Our diverse operations include producing plays, conducting art research, curating immersive experiences, and hosting engaging workshops.
+                        </p>
+                        <p style="font-size: 1.05rem; line-height: 1.8; color: #a1a1aa;">
+                            We collaborate with educational institutions, businesses, non-profits, and government bodies, forming impactful partnerships to bring our shared vision to life and make a measurable, positive impact on human lives.
+                        </p>
+                    </div>
+                    <div class="about-img reveal">
+                        <img loading="lazy" decoding="async" src="images/about/team_creators.webp" alt="Artistic Humans Team of Creators" style="border-radius: 12px; border: 1px solid var(--glass-border); width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                    </div>
+                </div>
+
+                <!-- Dual Vision & Mission Cards -->
+                <div class="cast-preview-grid reveal" style="margin-top: 60px;">
+                    <div class="cast-preview-card magnetic">
+                        <span class="showcase-tag">Our Guiding Star</span>
+                        <h3>The <span class="accent-gold">Vision</span></h3>
+                        <p class="quote" style="font-size: 1.4rem; line-height: 1.6; font-style: italic; color: #f4f4f5; margin-bottom: 0;">
+                            “Create a platform for humans to discover the artistic human within themselves.”
+                        </p>
+                    </div>
+                    <div class="cast-preview-card magnetic">
+                        <span class="showcase-tag">Our Daily Purpose</span>
+                        <h3>The <span class="accent-primary">Mission</span></h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7; color: #d4d4d8; margin-bottom: 0;">
+                            “Through the medium of art, empower visionaries to create innovative solutions, build a community, help people evolve, inspire, and enable lasting change.”
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Connected Pillars Section -->
+        <section id="pillars" class="section">
+            <div class="section-transition"></div>
+            <div class="content-wrapper">
+                <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;" class="reveal">
+                    <span class="subpage-tag">Systemic Impact</span>
+                    <h2 style="font-size: clamp(2.2rem, 4vw, 3.5rem);">A Practice Built on <span class="accent-gold">Five Pillars</span></h2>
+                    <p style="color: #a1a1aa; font-size: 1.1rem; line-height: 1.6;">Each pillar reinforces the others: productions create gripping stories, platforms build public access, and cross-sector partnerships expand measurable value.</p>
+                </div>
+
+                <div class="pillars-grid">
+                    <div class="pillar-card reveal magnetic">
+                        <span class="pillar-num">01</span>
+                        <i class="fas fa-theater-masks pillar-icon"></i>
+                        <h3>Theatre & Productions</h3>
+                        <p>Original multilingual plays (Hindi, Gujarati, Marathi) driven by rigorous artist-led storytelling, historical depth, and experimental stagecraft.</p>
+                    </div>
+
+                    <div class="pillar-card reveal magnetic">
+                        <span class="pillar-num">02</span>
+                        <i class="fas fa-graduation-cap pillar-icon"></i>
+                        <h3>Education & Youth</h3>
+                        <p>Theatre-based learning methodologies that build confidence, emotional literacy, communication, and leadership among students and tribal youth.</p>
+                    </div>
+
+                    <div class="pillar-card reveal magnetic">
+                        <span class="pillar-num">03</span>
+                        <i class="fas fa-hands-helping pillar-icon"></i>
+                        <h3>Civic & Social Impact</h3>
+                        <p>Large-scale public awareness projects connecting performing arts with public policy, constitutional literacy, environment, and community health.</p>
+                    </div>
+
+                    <div class="pillar-card reveal magnetic">
+                        <span class="pillar-num">04</span>
+                        <i class="fas fa-landmark pillar-icon"></i>
+                        <h3>Cultural Platforms</h3>
+                        <p>Recurring stages, festivals, and showcase platforms like <em>Sanskrutik Kala Manch</em> and <em>K Se Kalakaar</em> supporting emerging artists and grassroots creators.</p>
+                    </div>
+
+                    <div class="pillar-card reveal magnetic">
+                        <span class="pillar-num">05</span>
+                        <i class="fas fa-handshake pillar-icon"></i>
+                        <h3>Research & Collaboration</h3>
+                        <p>Strategic partnerships with government departments (Home, Agriculture, Culture, Education), universities, foundations, and corporate visionaries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flagship Projects & Case Studies -->
+        <section id="milestones" class="section">
+            <div class="section-transition"></div>
+            <div class="content-wrapper">
+                <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;" class="reveal">
+                    <span class="subpage-tag">Signature Milestones</span>
+                    <h2 style="font-size: clamp(2.2rem, 4vw, 3.5rem);">Landmark <span class="accent-primary">Projects</span></h2>
+                    <p style="color: #a1a1aa; font-size: 1.1rem; line-height: 1.6;">From breaking national records to receiving global recognition from the United Nations, our projects are designed for scale and deep social participation.</p>
+                </div>
+
+                <div class="showcase-grid">
+                    <!-- Project 1: 75x75x75 -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/about/amrit_mahotsav_75.webp" alt="Amrit Mahotsav 75x75x75 Project" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">National Milestone • Record Initiative</span>
+                            <h3>Amrit Mahotsav 75×75×75</h3>
+                            <p>75 shows in 75 institutions across 75 locations in a single day! Celebrated on Shaheed Day (March 23, 2023) with the Government of Maharashtra, uniting students, artists, colleges, and civic leaders on one synchronized platform.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-users"></i> 1,000+ Students • 18,000+ Audience
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Pruthvi Che Shetkari -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/darshan/pruthvi_un_fao.webp" alt="Pruthvi Che Shetkari Millets Play" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Global Recognition • UN FAO</span>
+                            <h3>Pruthvi Che Shetkari</h3>
+                            <p>The World's first dance-drama theatre production based on millets, created during the International Year of Millets 2023. Officially featured and recognized by the United Nations' Food and Agriculture Organization (FAO).</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-globe"></i> UN FAO Recognized Production
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Rashtragranth -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/darshan/rashtragranth_poster.webp" alt="Rashtragranth Constitution Play" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Civic Literacy • Mega Theatre</span>
+                            <h3>Rashtragranth</h3>
+                            <p>India's first play based on the Constitution of India. An ambitious live theatrical experience bringing together 40+ artists and technicians to translate constitutional history, democratic ideals, and fundamental rights into gripping drama.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-book-open"></i> 40+ Artists & Technicians
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Bhumika -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/about/bhumika_poster.webp" alt="Bhumika Play Poster" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Award Winner • Dual Language</span>
+                            <h3>Bhumika: The Journey Within</h3>
+                            <p>A critically acclaimed Hindi-Gujarati production exploring identity and existential reflection. It garnered 18 major accolades across national and state-level festivals, setting a high standard for contemporary experimental theatre.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-trophy"></i> 18 Awards • 2 National Festivals
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Farmers for Forests -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/about/streetplay_forests.webp" alt="Farmers for Forests Street Play" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Nukkad Natak • Gadchiroli</span>
+                            <h3>नुक्कड़ नाटक: "वनाचे वचन"</h3>
+                            <p>Street play campaign in Gadchiroli, Maharashtra in partnership with Farmers for Forests. Used live grassroots theatre to inspire households to adopt clean cookstoves, protecting health, wild forests, and wildlife corridors.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-tree"></i> 200+ Shows • 33,000+ Citizens
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Global Vikas Trust -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/about/global_vikas_trust.webp" alt="Tree Plantation Street Play Beed" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Ecological Movement • Beed</span>
+                            <h3>नुक्कड़ नाटक: "झाडे लावा, झाडे जगवा!"</h3>
+                            <p>Supporting the 25-lakh tree plantation drive led by Mayank Gandhi in drought-prone Beed. Took theatre into farms, village squares, and schools to teach sustainable tree care and community stewardship.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-seedling"></i> 61 Shows in 60+ Villages
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 7: New Criminal Laws -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/about/criminal_laws_home_dept.webp" alt="Maharashtra Home Department Theatre" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Home Department of Maharashtra</span>
+                            <h3>New Criminal Laws Citizen Campaign</h3>
+                            <p>A high-impact citizen empowerment theatre tour commissioned by the Maharashtra Home Department to educate the public on legal reforms and civic safety over 5 intense days across public transit hubs and auditoriums.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-shield-alt"></i> 30 Shows • 20,000+ Audience
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 8: Tribal Youth Theatre Gorai -->
+                    <div class="showcase-card reveal magnetic">
+                        <img loading="lazy" decoding="async" src="images/about/tribal_kids_gorai.webp" alt="Tribal Kids Gorai Theatre" class="showcase-card-img">
+                        <div class="showcase-card-body">
+                            <span class="showcase-tag">Youth Empowerment • Gorai Village</span>
+                            <h3>Theatre with Tribal Youth</h3>
+                            <p>A multi-month immersive theatre programme conducted in partnership with Atharva Foundation for children of Gorai Village, nurturing self-expression and staging two full-length original productions.</p>
+                            <div class="showcase-stat-badge">
+                                <i class="fas fa-child"></i> Community Youth Development
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Institutional Recognition & Endorsements -->
+        <section class="section">
+            <div class="section-transition"></div>
+            <div class="content-wrapper">
+                <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;" class="reveal">
+                    <span class="subpage-tag">Institutional Trust</span>
+                    <h2 style="font-size: clamp(2.2rem, 4vw, 3.5rem);">Recognition as <span class="accent-gold">Trust</span></h2>
+                    <p style="color: #a1a1aa; font-size: 1.1rem; line-height: 1.6;">Government and institutional endorsements are treated as evidence of trust — and as a responsibility to create larger, more durable platforms for artists and citizens.</p>
+                </div>
+
+                <div class="endorsements-grid reveal">
+                    <div class="endorsement-card magnetic" onclick="openLightbox('images/darshan/cm_appreciation.webp')">
+                        <img loading="lazy" decoding="async" src="images/darshan/cm_appreciation.webp" alt="Appreciation from Hon'ble Chief Minister of Maharashtra" class="endorsement-img">
+                        <div class="endorsement-caption">
+                            <strong>Hon'ble Chief Minister</strong><br>Government of Maharashtra
+                        </div>
+                    </div>
+                    <div class="endorsement-card magnetic" onclick="openLightbox('images/darshan/mp_appreciation.webp')">
+                        <img loading="lazy" decoding="async" src="images/darshan/mp_appreciation.webp" alt="Appreciation from Member of Parliament Gopal Shetty" class="endorsement-img">
+                        <div class="endorsement-caption">
+                            <strong>Shri Gopal Shetty</strong><br>Member of Parliament (Mumbai North)
+                        </div>
+                    </div>
+                    <div class="endorsement-card magnetic" onclick="openLightbox('images/darshan/pruthvi_un_fao.webp')">
+                        <img loading="lazy" decoding="async" src="images/darshan/pruthvi_un_fao.webp" alt="United Nations FAO Recognition" class="endorsement-img">
+                        <div class="endorsement-caption">
+                            <strong>United Nations FAO</strong><br>Millets Dance-Drama Feature
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder Spotlight Banner -->
+        <section class="section" style="padding-top: 20px;">
+            <div class="content-wrapper glass-card reveal">
+                <div class="about-grid" style="align-items: center;">
+                    <div class="about-img">
+                        <img loading="lazy" decoding="async" src="images/darshan/darshan_portrait_1.webp" alt="Darshan Mahajan, Founder of Artistic Humans" style="width: 100%; border-radius: 12px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0,0,0,0.7);">
+                    </div>
+                    <div class="about-text">
+                        <span class="subpage-tag">Leadership</span>
+                        <h2 style="font-size: 2.4rem; margin-bottom: 12px;">Darshan <span class="accent-gold">Mahajan</span></h2>
+                        <p class="role" style="color: var(--accent); font-size: 1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;">Founder • Theatre Practitioner • Social Entrepreneur</p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #d4d4d8; margin-bottom: 25px;">
+                            For over 15 years, Darshan has bridged original playwriting, acting, television, civic movements, and cultural institution-building. Having portrayed Mahatma Gandhi in over 1,000 shows worldwide and spearheaded landmark public initiatives, he leads Artistic Humans with an artist-first, community-driven ethos.
+                        </p>
+                        <div class="btn-group" style="justify-content: flex-start;">
+                            <a href="about-darshan.html" class="btn btn-primary magnetic"><i class="fas fa-arrow-right"></i> Read Founder's Full Journey</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Banner -->
+        <section class="section" style="min-height: auto; padding: 60px 20px 100px;">
+            <div class="content-wrapper glass-card reveal" style="text-align: center; padding: 60px 30px;">
+                <span class="subpage-tag">Let's Create Together</span>
+                <h2 style="font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 15px;">Create • Collaborate • Commission • Curate</h2>
+                <p style="color: #a1a1aa; font-size: 1.15rem; max-width: 650px; margin: 0 auto 35px;">
+                    Whether you are an artist seeking a stage, an institution planning an impactful cultural campaign, or a partner ready to build public value through art.
+                </p>
+                <div class="btn-group">
+                    <a href="index.html#contact" class="btn btn-primary magnetic"><i class="fas fa-envelope"></i> Get in Touch</a>
+                    <a href="about-darshan.html" class="btn btn-outline magnetic"><i class="fas fa-user-circle"></i> Connect with Darshan</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image Preview">
+        <button class="lightbox-close" aria-label="Close modal">&times;</button>
+        <img id="lightbox-img" src="" alt="Enlarged Document">
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">Artistic Humans</div>
+            <p class="footer-tagline">Curiosity to Creation • Empowering Art, Creating Communities.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="about-darshan.html">Darshan Mahajan</a>
+                <a href="index.html#work">Productions</a>
+                <a href="index.html#gallery">Gallery</a>
+                <a href="index.html#contact">Auditions & Contact</a>
+            </div>
+            <div class="social-links" style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
+                <a href="https://www.facebook.com/artistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="magnetic" style="color: var(--accent); font-size: 1.3rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/theartistichumans/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="magnetic" style="color: var(--accent); font-size: 1.3rem;"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="#" class="back-to-top magnetic" style="margin-top: 30px;">
+                <i class="fas fa-arrow-up"></i>
+                <span>Back to Top</span>
+            </a>
+            <p class="footer-credits">&copy; 2026 Artistic Humans. Profile 2026 Edition.</p>
+        </div>
+    </footer>
+
+    <!-- Three.js + Ambient Particles + Main Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="webgl-bg.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
